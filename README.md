@@ -30,7 +30,7 @@ I transform raw sales data in to clean visuals that show trends over time allowi
     *  I pulled these files in to Power BI using Power Query. I created one Query for Month to Date and another for Month over Month.
 ### Power BI Model Design
 * My finished product would have 6 pages. Left to Right: Department month over month (department name redacted), Department month to date (department name redacted), supervisor month over month, supervisor month to date, agent month over month, and agent month to date as shown below:
-*  ![Page snip](Assets/Power_BI_Trend_Tracker_Tabs.png)
+*  ![Page snip](Assets/Power_BI_Trend_Tracker_Tabs_2.png)
     *  All pages except for the department pages have a slicer. For the supervisor pages, the slicer filters by manager. For the agent pages, the slicer filters by agent.
     *  ![Sup_Slicer](Assets/Manager_Slicer.png) 
 *  I created measures using DAX
