@@ -53,7 +53,7 @@ I transform raw sales data in to clean visuals that show trends over time allowi
     * Added data labels
     * Formatted the KPI to a percentage (if applicable)
 * Below is the final product after the report is published to the department. Agents and supervisors can now go to the report, navigate to a month over month or month to date tab, select a name using the slicer, and use the button navigator to select a KPI. This will show them a trend over time based on their selections:
-* ![Finished_Product](Assets/Finished_Trend_KPI_Tracker.png)
+* ![Finished_Product](Assets/Finished_Trend_KPI_Tracker_2.png)
 ### Updating the Model
 * Each time a new sales tracker is released, I update the month to date data. Each time an end of month sales tracker is released, I update the month over month data. I make these updates with the following steps:
     * Make sure the new tracker's columns match my data in the Power BI model
