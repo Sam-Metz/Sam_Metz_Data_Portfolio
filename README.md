@@ -16,7 +16,7 @@ I transform raw sales data in to clean visuals that show trends over time allowi
 * My end product in Power BI will show Month to Date and Month over Month trends for sales agents, supervisors, and the entire department. 
    * For the month over month portion of my Power BI report, I will need to create one table with all of end of month Sales trackers stacked on top of one another. I will also add a date column so that each tracker is date-stamped after it has been appended to the larger table.
       * The end of month sales trackers for 2023, 2024 and 2025 were contained in separate files on my desktop based on their year as shown below:
-      * ![Sales_Tracker_File_Explorer](Assets/Sales_Tracker_File_Explorer_11.28.25.png)
+      * ![Sales_Tracker_File_Explorer](Assets/File_Explorer_2.png)
       * For each year's data, I performed the following steps to create one table per year:
         *  Load the sales trackers in to power query excel.
         *  Change the first row to headers
