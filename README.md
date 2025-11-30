@@ -24,7 +24,7 @@ I transform raw sales data in to clean visuals that show trends over time allowi
         *  In Excel, I confirmed that the columns from all appended trackers aligned. Once confirmed, I filtered the data to show only the rows with the column headers from the appended sales trackers and deleted these rows since they were no longer needed
         *  Added a column to the left of the file name column.
           *  As shown below, I extracted the date from the file name by using =TEXTBEFORE(TEXTAFTER(C2, "Tracker "), ".xlsx") and dragging the formula down to fill all of column B. I then copied the results in column B and pasted values only in column A. I used find and replace to find all "."  in column A and replace them with "/". I formatted column A as a date and deleted column B:
-          *  ![Compilation_Clean_11.28.25](Assets/Compilation_Clean_3_11.28.25.png)
+          *  ![Compilation_Clean_11.28.25](Assets/Compilation_Clean_4.png)
       *  After completing these steps for each year, I combined the resulting year files in to one file containing a table that stacked all end of month sales trackers from January 2023 - July 2025.
     *  For the Month to Date portion of my Power BI report, I applied the same month over month steps to append all trackers from the current month in to one table. This resulted in one month to date table with all of the current month's trackers stacked and time stamped.
     *  I pulled these files in to Power BI using Power Query. I created one Query for Month to Date and another for Month over Month.
