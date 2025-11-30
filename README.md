@@ -47,7 +47,7 @@ I transform raw sales data in to clean visuals that show trends over time allowi
     * Group the bookmarks by page (outlined in green)
     * Change bookmark settings to display, current page, and all visuals to ensure all visuals are controlled by the bookmarks and the bookmark navigator (highlighted in yellow).
     * Click on each bookmark and hide or unhide visuals to ensure the proper visual is showing for each bookmark (Outlined in red). Update the bookmark. 
-    * ![Bookmark_Method](Assets/Bookmark_Method.png)
+    * ![Bookmark_Method](Assets/Bookmark_Method_2.png)
 * I formatted my visuals with the following steps:
     * Set the y-axis minimum and maximum
     * Added data labels
