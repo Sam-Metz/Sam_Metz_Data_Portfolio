@@ -36,7 +36,7 @@ I transform raw sales data in to clean visuals that show trends over time allowi
 *  I created measures using DAX
     *  This dashboard tracks a total of 9 sales KPI's, but, for purposes of this portfolio, I will share my measure creation process using only conversion as a focal point.
     *  _Agent Orders Measure_ (Redacted column name is the name of the orders column):
-    *  ![Orders_Measure](Assets/Orders_Measure.png)
+    *  ![Orders_Measure](Assets/Orders_Measure_2.png)
     *  _Agent Calls Measure_
     *  ![Agent_Calls](Assets/Agent_Calls.png)
     *  _Agent Conversion Measure_:
