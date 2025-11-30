@@ -9,7 +9,7 @@ Thank you for visiting my data portoflio.
 
 
 ## Power BI KPI Dashboard
-I transform raw sales data in to clean visuals that show trends over time allowing stakeholders to make data-driven decisions more quickly and efficiently.
+I transform raw sales data in to clean visuals that show trends over time allowing stakeholders to make data-driven decisions more quickly and efficiently. All data in this project is randomized and anonymous.
 ### Prepare the Data
 * Below is a snip of the raw data from the KPI (Key Performance Indicator) sales tracker for the department. This is sent out daily by a team of analysts. It includes month to date sales data for each agent in the department. I have randomized the information in this data using the =RAND() function in Excel.
 * ![Random_Sales_Tracker](Assets/Random_KPI_Tracker_Snip_2_11.28.25.png)
