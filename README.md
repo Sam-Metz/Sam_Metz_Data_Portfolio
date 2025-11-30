@@ -42,7 +42,7 @@ I transform raw sales data in to clean visuals that show trends over time allowi
     *  _Agent Conversion Measure_:
     *  ![Agent_Conversion](Assets/Agent_Conversion_2.png)
 *  I set up a bookmark navigator (outlined in green). Each button within the bookmark navigator selects a different KPI and reveals that KPI's chart for the agent selected in the slicer. I designed the line charts for each KPI by dragging the measure to the y-axis and the date to the x-axis (outlined in red). Power BI automatically recognized the date heirarchy which allows me to change the time perspective as needed:
-    *  ![Trend_Chart](Assets/Trend_Chart_2.png)
+    *  ![Trend_Chart](Assets/Trend_Chart_3.png)
 *  I tailored my selection settings with the following steps:
     * Group the bookmarks by page (outlined in green)
     * Change bookmark settings to display, current page, and all visuals to ensure all visuals are controlled by the bookmarks and the bookmark navigator (highlighted in yellow).
