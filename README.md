@@ -108,9 +108,10 @@ I transform the hours worked report in to a readable payroll calculator cutting 
       * In the cell under the first date, type the following formula: =SUMIFS('Time Card'!$E:$E,'Time Card'!$A:$A,'Time Card Assist'!$A$2,'Time Card'!$C:$C,'Time Card Assist'!J1)
          * This formula sums the formatted duration from the cleaned data set in page one if the name column contains the agent's name and the date column contains the date in question.
          * Autofill this formula right.
-         * Apply absolute references to the date cell and remove them from the agent name cell then drage the edited formula down so that it can be applied to the other names.
+         * Apply absolute references to the date cell and remove them from the agent name cell then drag the edited formula down so that it can be applied to the other names.
          * Reset the absolute references and drag these formulas right to autofill for dates.
-         *   
+         * Below is the finished product
+         * ![Final Payroll Calc Snip](Assets/Final_Payroll_Calc_Snip.png)  
   
 
 [Home](#sam-metz-data-portfolio)
