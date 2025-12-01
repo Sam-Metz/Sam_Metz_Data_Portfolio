@@ -97,6 +97,21 @@ I transform the hours worked report in to a readable payroll calculator cutting 
     * Enter the following formula in to cell E2: =IF(LEN(F2)<6,(F2\*24)/60,F2\*24) and copy it down to fill all of column E
     * The clean data set is shown below
     * ![Cleaned_Dataset_Payroll_Calculator](Assets/Cleaned_Dataset_Payroll_Calculator_2.png)
+### Design the Calculator
+* Steps:
+   * Open a new Excel report
+   * Create two pages within that report.
+   * Paste the cleaned time card from the steps above in to the first page
+   * The second page is the calculator:
+      * List the agent names in column A
+      * List the dates for the current payroll cycle in row 1
+      * In the cell under the first date, type the following formula: =SUMIFS('Time Card'!$E:$E,'Time Card'!$A:$A,'Time Card Assist'!$A$2,'Time Card'!$C:$C,'Time Card Assist'!J1)
+         * This formula sums the formatted duration from the cleaned data set in page one if the name column contains the agent's name and the date column contains the date in question.
+         * Autofill this formula right.
+         * Apply absolute references to the date cell and remove them from the agent name cell then drage the edited formula down so that it can be applied to the other names.
+         * Reset the absolute references and drag these formulas right to autofill for dates.
+         *   
+  
 
 [Home](#sam-metz-data-portfolio)
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
