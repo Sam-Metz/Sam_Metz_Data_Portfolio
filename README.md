@@ -111,7 +111,14 @@ I transform the hours worked report in to a readable payroll calculator cutting 
          * Apply absolute references to the date cell and remove them from the agent name cell then drag the edited formula down so that it can be applied to the other names.
          * Reset the absolute references and drag these formulas right to autofill for dates.
          * Below is the finished product
-         * ![Final Payroll Calc Snip](Assets/Final_Payroll_Calc_Snip.png)  
+         * ![Final Payroll Calc Snip](Assets/Final_Payroll_Calc_Snip.png)
+### Updating the Calculator
+* Steps:
+   * Download the time card report for the current payroll cycle
+   * Repeat the data preparation steps
+   * Clear the first page of the payroll calculator to make room for the new data
+   * Copy and paste the prepared time card in to the first page of the payroll calculator
+   * Update the dates on the second page of the calculator 
   
 
 [Home](#sam-metz-data-portfolio)
