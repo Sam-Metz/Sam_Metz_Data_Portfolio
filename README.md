@@ -4,6 +4,7 @@ Thank you for visiting my data portoflio.
     * [Power BI KPI Dashboard](#power-bi-kpi-dashboard)
     * [Excel Payroll Calculator](#excel-payroll-calculator)
     * [Coursera Case Study](#coursera-case-study)
+    * [Priority Sort Calculator](#priortiy-sort)
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## Priority Sort
@@ -37,8 +38,17 @@ A task's priority is determined by it's importance category (where does the task
       * Importance Point Column Setup:
          * The Importance category is entered manually for each task
             * The importance point column looks up the importance point value by referencing the value entered in the importance column in the importance table of the points tab using formula: =VLOOKUP(C2,Points!A:B,2,FALSE) as show below:
-            * ![Importance Point](Assets/Importance_Point_Formula.png)         
+            * ![Importance Point](Assets/Importance_Point_Formula.png)
+      * Priority Column Setup:
+         * The priority column adds all of the points columns using formula: =SUM(H2:J2) as shown below:
+         * ![Priority Formula](Assets/Priority_Formula.png)
+      * Sorting:
+         * Autofill all formulas to the cells below them
+         * Sort the entire table by the priority column lowest to highest
+         * The tasks that are sorted to the top of the list are the tasks that need to get done first
+         * Edit the point values and categories to match your preferences.           
 
+[Home](#sam-metz-data-portfolio)
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
