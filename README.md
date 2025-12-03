@@ -14,13 +14,31 @@ A task's priority is determined by it's importance category (where does the task
 
 ### Priority Sort Design
 * Set up 2 tabs. Tab one is the actual to do list calculator that will sort tasks. Tab 2 is the points tab.
-* The points tab contains 3 separate tables: Importance table, effort table, and urgency table.
-   * Importance: what category does this task fall in to? rank these categories from most to least important 
-      * Assign each category an importance letter and a point value. Lower points result in higher priority rank
-   * Effort: how complex is the task? how much time will it take?
-      * Rank these complexity categories from least to most effort and assign a point value to each complexity category. The less complex the lower the points and higher priority.
-   * Due Date: set urgency preferences: As a due date approaches, the point value decreases and the task becomes higher priority. My preference is that due date has the most impact on priority.
-* ![Priority Sort](Assets/Personal_Priorit_Sort.png)  
+   * The points tab contains 3 separate tables: Importance table, effort table, and urgency table.
+      * Importance: what category does this task fall in to? rank these categories from most to least important 
+         * Assign each category an importance letter and a point value. Lower points result in higher priority rank
+      * Effort: how complex is the task? how much time will it take?
+         * Rank these complexity categories from least to most effort and assign a point value to each complexity category. The less complex the lower the points and higher priority.
+      * Due Date: set urgency preferences: As a due date approaches, the point value decreases and the task becomes higher priority. My preference is that due date has the most impact on priority.
+         * ![Priority Sort](Assets/Personal_Priorit_Sort.png)
+   * The Sort Calculator tab setup:
+      * Urgency Point Column setup:
+         * The due date is entered manually for each task.
+            * Once the due date is entered, They Day left column calculates the number of days left using the formula: =F2 - TODAY(). This finds the difference between the current date and the due date. The day left column is formatted as a whole number.
+            * ![Day Left](Assets/Day_Left_Formula.png)
+               * The urgency column assigns an urgency category based on the number of days left until the due date using formula: =IF(G2<=0,1, IF(G2<=3,2,IF(G2<=5,3,IF(G2<=20,4,5)))) as shown below. If the day left column contains a value less than or equal to 0 then it returns 1. If the day left column contains a value that is less than or equal to 3 then it returns 2. If the day left column contains a value that is less than or equal to 5 then it returns a 3. If the day left column contains a value that is less than or equal to 20 then it return 4. Otherwise, it returns a value of 5.
+               * ![Urgency Formual](Assets/Urgency_Formula.png)
+                  * The urgency point column looks up a point value by referencing the value in the urgency column and returning the corresponding point value from the urgency table in the points tab using formula: =VLOOKUP(E2,Points!I:J,2,FALSE) as shown below:
+                     * ![Urgency Point](Assets/Urgency_Point_Formula.png)
+      * Effort Point Column Setup:
+         * The effort is entered manually for each task.
+            * The effort point column looks up the effort point value by referencing the value entered in the effort column in the effort table of the points tab using formula: =VLOOKUP(D2,Points!E:F,2,FALSE) as shown below:
+            * ![Effort Poing](Assets/Effort_Point_Formula.png)
+      * Importance Point Column Setup:
+         * The Importance category is entered manually for each task
+            * The importance point column looks up the importance point value by referencing the value entered in the importance column in the importance table of the points tab using formula: =VLOOKUP(C2,Points!A:B,2,FALSE) as show below:
+            * ![Importance Point](Assets/Importance_Point_Formula.png)         
+
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
