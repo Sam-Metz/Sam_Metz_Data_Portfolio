@@ -6,7 +6,17 @@ Thank you for visiting my data portoflio.
     * [Coursera Case Study](#coursera-case-study)
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+## Power BI Calls and Marketing Dashboard
+I use SQL Snowflake and Power BI to create a dashboard that monitors trends in call results and marketing channel sources.
 
+### Business Task
+Create data visibility that helps stakeholders quickly identify possible correlations between sales volume, call marketing channels, and call results. 
+
+### Source the Data
+
+![Marketing YTD Query](Assets/Anonymous_Call_Result_Trend_YTD_Query.png)
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## Power BI KPI Dashboard
 I transform raw sales data in to clean visuals that show trends over time allowing stakeholders to make data-driven decisions more quickly and efficiently. All data in this project is randomized and anonymous.
