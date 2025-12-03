@@ -4,7 +4,7 @@ Thank you for visiting my data portoflio.
     * [Power BI KPI Dashboard](#power-bi-kpi-dashboard)
     * [Excel Payroll Calculator](#excel-payroll-calculator)
     * [Coursera Case Study](#coursera-case-study)
-    * [Priority Sort Calculator](#priortiy-sort)
+    * [Priority Sort Calculator](#priority-sort)
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## Priority Sort
