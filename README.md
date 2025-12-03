@@ -15,8 +15,12 @@ A task's priority is determined by it's importance category (where does the task
 ### Priority Sort Design
 * Set up 2 tabs. Tab one is the actual to do list calculator that will sort tasks. Tab 2 is the points tab.
 * The points tab contains 3 separate tables: Importance table, effort table, and urgency table.
-   * Importance: what category does this task fall in to? why is the task on the list?
-   * 
+   * Importance: what category does this task fall in to? rank these categories from most to least important 
+      * Assign each category an importance letter and a point value. Lower points result in higher priority rank
+   * Effort: how complex is the task? how much time will it take?
+      * Rank these complexity categories from least to most effort and assign a point value to each complexity category. The less complex the lower the points and higher priority.
+   * Due Date: set urgency preferences: As a due date approaches, the point value decreases and the task becomes higher priority. My preference is that due date has the most impact on priority.
+* ![Priority Sort](Assets/Personal_Priorit_Sort.png)  
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
