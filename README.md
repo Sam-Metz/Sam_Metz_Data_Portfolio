@@ -14,7 +14,7 @@ Create data visibility that helps stakeholders quickly identify possible correla
 
 ### Source the Data
 
-![Marketing YTD Query](Assets/Anonymous_Call_Result_Trend_YTD_Query.png)
+![Marketing YTD Query](Assets/Anonymous_Call_Result_Trend_YTD_Query_2.png)
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
