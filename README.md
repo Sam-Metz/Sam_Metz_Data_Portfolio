@@ -6,15 +6,41 @@ Thank you for visiting my data portoflio.
     * [Coursera Case Study](#coursera-case-study)
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+## Priority Sort
+I use Google Sheets to sort tasks based on priority creating a dynamic todo list that always brings the highest priority task to the top.
+
+### Methodology
+A task's priority is determined by it's importance category (where does the task come from), its effort level, and its due date. 
+
+### Priority Sort Design
+* Set up 2 tabs. Tab one is the actual to do list calculator that will sort tasks. Tab 2 is the points tab.
+* The points tab contains 3 separate tables: Importance table, effort table, and urgency table.
+   * Importance: what category does this task fall in to? why is the task on the list?
+   * 
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 ## Power BI Calls and Marketing Dashboard
-I use SQL Snowflake and Power BI to create a dashboard that monitors trends in call results and marketing channel sources.
+I use SQL Snowflake and Power BI to create a dashboard that monitors trends in call results and marketing channel sources. All data in this project is anonymous and has been randomized.
 
 ### Business Task
 Create data visibility that helps stakeholders quickly identify possible correlations between sales volume, call marketing channels, and call results. 
 
 ### Source the Data
-
-![Marketing YTD Query](Assets/Anonymous_Call_Result_Trend_YTD_Query_2.png)
+* The query below pulls a table with one row per call during the current year. It includes relevant information for my report including call result, source marketing channel, and call start time.
+* ![Marketing YTD Query](Assets/Anonymous_Call_Result_Trend_YTD_Query_2.png)
+* Query Breakdown:
+   * Join the calls table to the call results table. Both the calls table and the call results table have a call result id. Joining these tables on this id allows access to the call result name.
+   * Include columns:
+      * name: the combination of name one and name two.
+      * call id
+      * call result id
+      * call result name
+      * marketing channel name
+      * call start time
+   * Filter in the where clause to:
+      *  Exclude outgoing calls
+      *      
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
