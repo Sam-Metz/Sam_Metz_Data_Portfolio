@@ -1,8 +1,6 @@
 # Sam Metz Data Portfolio
 Thank you for visiting my data portoflio. 
 * Projects (click the link to view the project. click "home" at the end of any section to return here)
-    * [Power BI KPI Dashboard](#power-bi-kpi-dashboard)
-    * [Excel Payroll Calculator](#excel-payroll-calculator)
     * [Coursera Case Study](#coursera-case-study)
     * [Priority Sort Calculator](#priority-sort)
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
