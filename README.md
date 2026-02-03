@@ -22,6 +22,160 @@ The relevant tables for my analyses are order_items, users, and products. Below 
 
  * order_items: Includes information about the line items included on each order
     *  ![Order Items](Assets/order_items_table.png)
+ *  users: Includes Information about each customer
+    *  ![users](Assets/users_table.png)
+ *  products: Includes details about the products sold by the company
+    * ![Order Items](Assets/products_table.png)
+
+I applied the following query to these tables to create my formatted table:
+
+```sql
+WITH 
+Spend AS 
+      (SELECT
+        user_id,
+        sum(coalesce(order_total,0)) AS Total_Spend,
+        avg(order_total) AS avg_order_spend
+       FROM
+        (SELECT
+          user_id,
+          order_id,
+          sum(coalesce(sale_price,0)) AS order_total
+        FROM
+          bigquery-public-data.thelook_ecommerce.order_items
+        WHERE
+          status <> 'Cancelled'
+          GROUP BY
+            user_id,
+            order_id)
+      GROUP BY
+        user_id),
+Last_Purchase AS 
+      (SELECT
+        DATE_DIFF(CURRENT_DATE(), DATE(MAX(created_at)), DAY) AS days_since_last_purchase,
+        user_id
+       FROM
+            bigquery-public-data.thelook_ecommerce.order_items
+        WHERE
+          status <> 'Cancelled'
+          GROUP BY
+            user_id),
+Country AS
+      (SELECT
+        *
+        FROM
+        (SELECT
+          id,
+          country,
+          1 AS flag
+         FROM
+          bigquery-public-data.thelook_ecommerce.users
+        )
+        PIVOT (max(flag) FOR country IN ( 'Brasil',  'Japan',  'United States',  'Colombia',  'Spain',  'China',  'Australia',  'France',  'Germany',  'Belgium',  'South Korea',  'Poland',  'United Kingdom',  'Deutschland',  'Austria'
+))),
+Category AS 
+      (SELECT
+       *
+       FROM
+       (SELECT
+        o.user_id,
+        p.category,
+        1 AS flag
+        FROM
+          bigquery-public-data.thelook_ecommerce.order_items o
+        LEFT JOIN
+          bigquery-public-data.thelook_ecommerce.products p
+        ON
+         o.product_id = p.id 
+        WHERE
+          o.status <> 'Cancelled'
+        )
+        PIVOT
+          (SUM(flag) FOR Category IN( 'Accessories', 'Plus', 'Swim', 'Active', 'Socks & Hosiery', 'Socks', 'Dresses', 'Pants & Capris', 'Fashion Hoodies & Sweatshirts', 'Skirts', 'Blazers & Jackets', 'Suits', 'Tops & Tees', 'Sweaters', 'Shorts', 'Jeans', 'Maternity', 'Sleep & Lounge', 'Suits & Sport Coats', 'Pants', 'Intimates', 'Outerwear & Coats', 'Underwear', 'Leggings', 'Jumpsuits & Rompers', 'Clothing Sets')))
+SELECT 
+          ANY_VALUE( CASE WHEN Lower(u.gender) = 'female' THEN 1
+          WHEN Lower(u.gender) = 'male' THEN 0
+          ELSE NULL
+          END) AS Gender,
+        ANY_VALUE(u.age) AS age,
+        COUNT(DISTINCT(o.order_id)) AS Order_Count,
+        ANY_VALUE(s.avg_order_spend) AS avg_order_spend,
+        sum(coalesce(o.sale_price,0)) AS total_spend,
+                          COALESCE(ANY_VALUE(co.Brasil),0) AS Brasil,
+                          COALESCE(ANY_VALUE(co.Japan),0) AS Japan,
+                          COALESCE(ANY_VALUE(co.`United States`),0) AS United_States,
+                          COALESCE(ANY_VALUE(co.Colombia),0) AS Colombia,
+                          COALESCE(ANY_VALUE(co.Spain),0) AS Spain,
+                          COALESCE(ANY_VALUE(co.China),0) AS China,
+                          COALESCE(ANY_VALUE(co.Australia),0) AS Australia,
+                          COALESCE(ANY_VALUE(co.France),0) AS France,
+                          COALESCE(ANY_VALUE(co.Germany),0) AS Germany,
+                          COALESCE(ANY_VALUE(co.Belgium),0) AS Belgium,
+                          COALESCE(ANY_VALUE(co.`South Korea`),0) AS South_Korea,
+                          COALESCE(ANY_VALUE(co.Poland),0) AS Poland,
+                          COALESCE(ANY_VALUE(co.`United Kingdom`),0) AS United_Kingdom,
+                          COALESCE(ANY_VALUE(co.Deutschland),0) AS Deutschland,
+                          COALESCE(ANY_VALUE(co.Austria),0) AS Austria,
+
+
+        ANY_VALUE(lp.days_since_last_purchase) AS days_since_last_purchase,
+                          COALESCE(ANY_VALUE(c.Accessories), 0) AS Accessories,
+                          COALESCE(ANY_VALUE(c.Plus), 0) AS Plus,
+                          COALESCE(ANY_VALUE(c.Swim), 0) AS Swim,
+                          COALESCE(ANY_VALUE(c.Active), 0) AS Active,
+                          COALESCE(ANY_VALUE(c.`Socks & Hosiery`), 0) AS Socks_Hosiery,
+                          COALESCE(ANY_VALUE(c.Socks), 0) AS Socks,
+                          COALESCE(ANY_VALUE(c.Dresses), 0) AS Dresses,
+                          COALESCE(ANY_VALUE(c.`Pants & Capris`), 0) AS Pants_Capris,
+                          COALESCE(ANY_VALUE(c.`Fashion Hoodies & Sweatshirts`), 0) AS Fashion_Hoodies_Sweatshirts,
+                          COALESCE(ANY_VALUE(c.Skirts), 0) AS Skirts,
+                          COALESCE(ANY_VALUE(c.`Blazers & Jackets`), 0) AS Blazers_Jackets,
+                          COALESCE(ANY_VALUE(c.Suits), 0) AS Suits,
+                          COALESCE(ANY_VALUE(c.`Tops & Tees`), 0) AS Tops_Tees,
+                          COALESCE(ANY_VALUE(c.Sweaters), 0) AS Sweaters,
+                          COALESCE(ANY_VALUE(c.Shorts), 0) AS Shorts,
+                          COALESCE(ANY_VALUE(c.Jeans), 0) AS Jeans,
+                          COALESCE(ANY_VALUE(c.Maternity), 0) AS Maternity,
+                          COALESCE(ANY_VALUE(c.`Sleep & Lounge`), 0) AS Sleep_Lounge,
+                          COALESCE(ANY_VALUE(c.`Suits & Sport Coats`), 0) AS Suits_Sport_Coats,
+                          COALESCE(ANY_VALUE(c.Pants), 0) AS Pants,
+                          COALESCE(ANY_VALUE(c.Intimates), 0) AS Intimates,
+                          COALESCE(ANY_VALUE(c.`Outerwear & Coats`), 0) AS Outerwear_Coats,
+                          COALESCE(ANY_VALUE(c.Underwear), 0) AS Underwear,
+                          COALESCE(ANY_VALUE(c.Leggings), 0) AS Leggings,
+                          COALESCE(ANY_VALUE(c.`Jumpsuits & Rompers`), 0) AS Jumpsuits_Rompers,
+                          COALESCE(ANY_VALUE(c.`Clothing Sets`), 0) AS Clothing_Sets
+
+      FROM
+        bigquery-public-data.thelook_ecommerce.users u
+      LEFT JOIN
+        bigquery-public-data.thelook_ecommerce.order_items o
+      ON
+        u.id = o.user_id
+      LEFT JOIN
+        bigquery-public-data.thelook_ecommerce.products p
+      ON
+        o.product_id = p.id
+      LEFT JOIN
+        Category c
+      ON
+        c.user_id = u.id
+      LEFT JOIN
+        Country co
+      ON
+        co.id = u.id
+      LEFT JOIN
+        Last_Purchase lp
+      ON
+        LP.user_id = u.id
+      LEFT JOIN
+        Spend s
+      ON
+        s.user_id = u.id
+      WHERE
+        o.status <> 'Cancelled'
+      GROUP BY
+        u.id;
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
