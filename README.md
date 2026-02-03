@@ -176,7 +176,7 @@ SELECT
         o.status <> 'Cancelled'
       GROUP BY
         u.id;
-
+```
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
 I use Google Sheets to sort tasks based on priority creating a dynamic todo list that always brings the highest priority task to the top.
