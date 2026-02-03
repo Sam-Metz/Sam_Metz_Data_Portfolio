@@ -21,7 +21,7 @@ In order to do complete this mission, I will need to combine these tables in to 
 The relevant tables for my analyses are order_items, users, and products. Below is a sample of each in their original format:
 
  * order_items: Includes information about the line items included on each order
-    *  
+    *  ![Order Items](Assets/order_items table.png)
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
