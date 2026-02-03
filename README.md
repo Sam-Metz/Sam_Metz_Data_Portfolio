@@ -5,6 +5,25 @@ Thank you for visiting my data portoflio.
     * [Priority Sort Calculator](#priority-sort)
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+## K Means Customer Analyses
+I use a k means to analyze a sample data set provided by Big Query. 
+
+### The Dataset
+I am working with the_look_ecommerce dataset in Big Query. It consists of 8 tables with sample data for a business. The tables include distribution_centers, events, inventory_items, order_items, products, thelook_ecommerce-table, and users. 
+
+### Mission
+My ultimate goal is to use K means to divide the customers in this data set in to groups based on their characteristics and purchase behaviors. This will allow my stakeholders to better understand their customer's and derive an effective marketing plan to increase revenue for the company. 
+
+### Plan
+In order to do complete this mission, I will need to combine these tables in to one table that has one row per user and columns for each characteristic that I want the model to consider. I will use the elbow method to determine the optimal number of centroids. After deciding on the number of centroids, I will run the model with that number and assign each customer to a centroid in my formatted table. I will upload this table to Power BI and create visuals to display the insights to my stakeholders.
+
+### Preparation
+The relevant tables for my analyses are order_items, users, and products. Below is a sample of each in their original format:
+
+ * order_items: Includes information about the line items included on each order
+    *  
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
 I use Google Sheets to sort tasks based on priority creating a dynamic todo list that always brings the highest priority task to the top.
 
