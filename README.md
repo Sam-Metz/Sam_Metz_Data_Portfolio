@@ -195,6 +195,12 @@ SELECT
 ```
 This creates the following table. I have hidden all but 2 country columns and all but 2 category columns to simplify:
 * ![Priority Sort](Assets/Formatted_K_Means_Table.png)
+
+### Elbow Method
+I saved the formatted table to Big Query and applied the following query to it. This runs the k means analyses with the number of centroids specified. I ran with 2, 3, 4, 5, 6, 7, 8, 9, and 10 centroids. I saved the results of each model to big query:
+```sql
+
+```
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
 I use Google Sheets to sort tasks based on priority creating a dynamic todo list that always brings the highest priority task to the top.
