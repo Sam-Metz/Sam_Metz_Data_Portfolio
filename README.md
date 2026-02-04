@@ -49,7 +49,8 @@ Spend AS
             user_id,
             order_id)
       GROUP BY
-        user_id),
+        user_id)
+    /*Spend creates an order table that calculates the total price of each order (excluding cancelled orders) in the order_items table. The order table has one row for each order. It shows the user id for each order as well. The outer query calculates the total spend and average spend per customer based on the temporary inner table. */,
 Last_Purchase AS 
       (SELECT
         DATE_DIFF(CURRENT_DATE(), DATE(MAX(created_at)), DAY) AS days_since_last_purchase,
@@ -59,7 +60,8 @@ Last_Purchase AS
         WHERE
           status <> 'Cancelled'
           GROUP BY
-            user_id),
+            user_id)
+      /*Last_Purchase finds the difference between the maximum created date and the current date for each order (excluding cancelled) in the order_items table and groups by user id to show the days since last purchase for each user*/,
 Country AS
       (SELECT
         *
@@ -72,7 +74,8 @@ Country AS
           bigquery-public-data.thelook_ecommerce.users
         )
         PIVOT (max(flag) FOR country IN ( 'Brasil',  'Japan',  'United States',  'Colombia',  'Spain',  'China',  'Australia',  'France',  'Germany',  'Belgium',  'South Korea',  'Poland',  'United Kingdom',  'Deutschland',  'Austria'
-))),
+)))
+      /*Country uses a one hot method do represent customer countries. It starts by creating a table that has a user id column and a country coumn. Each time the query finds a match between a user id and a country, it puts a 1 in the corresponding cell. Pivot the flips the data and creates a new table with one column per country. The maximum value in the list of country columns for each user is marked in the corresponding country column for that user. The query groups by user id by default.*/,
 Category AS 
       (SELECT
        *
@@ -92,15 +95,21 @@ Category AS
         )
         PIVOT
           (SUM(flag) FOR Category IN( 'Accessories', 'Plus', 'Swim', 'Active', 'Socks & Hosiery', 'Socks', 'Dresses', 'Pants & Capris', 'Fashion Hoodies & Sweatshirts', 'Skirts', 'Blazers & Jackets', 'Suits', 'Tops & Tees', 'Sweaters', 'Shorts', 'Jeans', 'Maternity', 'Sleep & Lounge', 'Suits & Sport Coats', 'Pants', 'Intimates', 'Outerwear & Coats', 'Underwear', 'Leggings', 'Jumpsuits & Rompers', 'Clothing Sets')))
+      /*Category joins the products and order items tables so that we can reference the product categories for each purchase. It then uses a one hot method by flagging each instance where a user id makes a purchase from a given category. It, then, creates a table with one column per category that shows the number of times that each user makes a purchase from each category.*/
 SELECT 
           ANY_VALUE( CASE WHEN Lower(u.gender) = 'female' THEN 1
           WHEN Lower(u.gender) = 'male' THEN 0
           ELSE NULL
           END) AS Gender,
+      /*Creates a Gender column that marks a 1 for females and a 0 for males*/
         ANY_VALUE(u.age) AS age,
+      /*Records the customer's age in the age column*/
         COUNT(DISTINCT(o.order_id)) AS Order_Count,
+      /*Counts orders placed*/
         ANY_VALUE(s.avg_order_spend) AS avg_order_spend,
+      /*Pulls average order spend from the spend table created above*/
         sum(coalesce(o.sale_price,0)) AS total_spend,
+      /*Pulls the sum of total spend from the order_items table*/
                           COALESCE(ANY_VALUE(co.Brasil),0) AS Brasil,
                           COALESCE(ANY_VALUE(co.Japan),0) AS Japan,
                           COALESCE(ANY_VALUE(co.`United States`),0) AS United_States,
@@ -116,7 +125,7 @@ SELECT
                           COALESCE(ANY_VALUE(co.`United Kingdom`),0) AS United_Kingdom,
                           COALESCE(ANY_VALUE(co.Deutschland),0) AS Deutschland,
                           COALESCE(ANY_VALUE(co.Austria),0) AS Austria,
-
+                        /*Pulls the country column and corresponding value of 0 or 1 (1 if the user is from that country) from the country table created above*/
 
         ANY_VALUE(lp.days_since_last_purchase) AS days_since_last_purchase,
                           COALESCE(ANY_VALUE(c.Accessories), 0) AS Accessories,
@@ -145,37 +154,44 @@ SELECT
                           COALESCE(ANY_VALUE(c.Leggings), 0) AS Leggings,
                           COALESCE(ANY_VALUE(c.`Jumpsuits & Rompers`), 0) AS Jumpsuits_Rompers,
                           COALESCE(ANY_VALUE(c.`Clothing Sets`), 0) AS Clothing_Sets
-
+                        /*Pulls the category column and the sum of purchases made from each category from the category table created above.*/
       FROM
         bigquery-public-data.thelook_ecommerce.users u
       LEFT JOIN
         bigquery-public-data.thelook_ecommerce.order_items o
       ON
         u.id = o.user_id
+      /*Joins the users and order_items tables based on records where the user id's match*/
       LEFT JOIN
         bigquery-public-data.thelook_ecommerce.products p
       ON
         o.product_id = p.id
+      /*Joins order_items and products tables on records where the product id's match*/
       LEFT JOIN
         Category c
       ON
         c.user_id = u.id
+      /*Joins the category table created above and the user table on records where the user id's match*/
       LEFT JOIN
         Country co
       ON
         co.id = u.id
+      /*Joins the country table created above and the user table on records where the user id's match.*/
       LEFT JOIN
         Last_Purchase lp
       ON
         LP.user_id = u.id
+      /*Joins the last purchase table created above and the user table on records where the user id's match*/
       LEFT JOIN
         Spend s
       ON
         s.user_id = u.id
+      /*Joins the spend table created above and the user table on records where the user id's match*/
       WHERE
         o.status <> 'Cancelled'
       GROUP BY
-        u.id;
+        u.id
+      /*Groups all data in the final product by user id*/
 ```
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
