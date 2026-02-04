@@ -193,8 +193,8 @@ SELECT
         u.id
       /*Groups all data in the final product by user id*/
 ```
-This creates the following table:
-* 
+This creates the following table. I have hidden all but 2 country columns and all but 2 category columns to simplify:
+* ![Priority Sort](Assets/Formatted_K_Means_Table.png)
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
 I use Google Sheets to sort tasks based on priority creating a dynamic todo list that always brings the highest priority task to the top.
