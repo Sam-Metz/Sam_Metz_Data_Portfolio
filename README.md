@@ -197,9 +197,72 @@ This creates the following table. I have hidden all but 2 country columns and al
 * ![Priority Sort](Assets/Formatted_K_Means_Table.png)
 
 ### Elbow Method
-I saved the formatted table to Big Query and applied the following query to it. This runs the k means analyses with the number of centroids specified. I ran with 2, 3, 4, 5, 6, 7, 8, 9, and 10 centroids. I saved the results of each model to big query:
-```sql
+I saved the formatted table to Big Query and applied the following query to it. This runs the k means analyses with the number of centroids specified. The query code includes my description of each step. I ran with 2, 3, 4, 5, 6, 7, 8, 9, and 10 centroids. I saved the results of each model to big query:
 
+```sql
+CREATE OR REPLACE MODEL
+  `linear-facet-257019.the_look_ecommerce_k_means.k_means_test`
+  /*The name of the final result*/
+OPTIONS
+  (
+    MODEL_TYPE = 'KMEANS',
+  /*Big Query's function for k means analyses*/
+    NUM_CLUSTERS = 2, 
+  /*The number of centroids to use*/
+    STANDARDIZE_FEATURES = TRUE 
+  /*Scales features being considered by the model. For example, a user's average order spend could be 100 but their country is only 1. Standardizing prevents the model from assigning more weight to the order spend than the country value. */
+  ) AS
+SELECT
+  Gender,
+  age,
+  Order_Count,
+  avg_order_spend,
+  total_spend,
+  Brasil,
+  Japan,
+  United_States,
+  Colombia,
+  Spain,
+  China,
+  Australia,
+  France,
+  Germany,
+  Belgium,
+  South_Korea,
+  Poland,
+  United_Kingdom,
+  Deutschland,
+  Austria,
+  days_since_last_purchase,
+  Accessories,
+  Plus,
+  Swim,
+  Active,
+  Socks_Hosiery,
+  Socks,
+  Dresses,
+  Pants_Capris,
+  Fashion_Hoodies_Sweatshirts,
+  Skirts,
+  Blazers_Jackets,
+  Suits,
+  Tops_Tees,
+  Sweaters,
+  Shorts,
+  Jeans,
+  Maternity,
+  Sleep_Lounge,
+  Suits_Sport_Coats,
+  Pants,
+  Intimates,
+  Outerwear_Coats,
+  Underwear,
+  Leggings,
+  Jumpsuits_Rompers,
+  Clothing_Sets
+FROM
+  `linear-facet-257019.the_look_ecommerce_k_means.formatted_table_k_means`
+/*Pulls the columns from the original table for the model to analyze*/
 ```
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
