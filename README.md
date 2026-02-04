@@ -27,7 +27,7 @@ The relevant tables for my analyses are order_items, users, and products. Below 
  *  products: Includes details about the products sold by the company
     * ![Order Items](Assets/products_table.png)
 
-I applied the following query to these tables to create my formatted table:
+I applied the following query to these tables to create my formatted table. My notes for each part of the query are included in the sql code:
 
 ```sql
 WITH 
@@ -193,6 +193,8 @@ SELECT
         u.id
       /*Groups all data in the final product by user id*/
 ```
+This creates the following table:
+* 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
 I use Google Sheets to sort tasks based on priority creating a dynamic todo list that always brings the highest priority task to the top.
