@@ -194,10 +194,10 @@ SELECT
       /*Groups all data in the final product by user id*/
 ```
 This creates the following table. I have hidden all but 2 country columns and all but 2 category columns to simplify:
-* ![Priority Sort](Assets/Formatted_K_Means_Table.png)
+* ![K means table](Assets/Formatted_K_Means_Table.png)
 
 ### Elbow Method
-I saved the formatted table to Big Query and applied the following query to it. This runs the k means analyses with the number of centroids specified. The query code includes my description of each step. I ran with 2, 3, 4, 5, 6, 7, 8, 9, and 10 centroids. I saved the results of each model to big query:
+For a successful k means analyses, it is imperative that I choose the right number of centroids. As I run the model with an increasing number of centroids, the mean squarred distance from the data points to their corresponding cluster will decrease. However, as I add centroids, the insights become more complex for my stakeholders. More specifically, 10 customer groups is just way too many customer groups to keep track of while 3 or 4 is much more manageable. I use the elbow method to determine when the rate of msd (mean squarred distance) decrease slows down drastically. The centroid number at which the slow down occurs will be the optimal number of centroids for the analyses. To begin, I saved the formatted table to Big Query and applied the following query to it. This runs the k means analyses with the number of centroids specified. The query code includes my description of each step. I ran with 2, 3, 4, 5, 6, 7, 8, 9, and 10 centroids. I saved the results of each model to big query:
 
 ```sql
 CREATE OR REPLACE MODEL
@@ -264,6 +264,23 @@ FROM
   `linear-facet-257019.the_look_ecommerce_k_means.formatted_table_k_means`
 /*Pulls the columns from the original table for the model to analyze*/
 ```
+I ran the following query on each of the models to find the mean squared distance for each number of centroids:
+```sql
+SELECT
+  *
+  FROM
+    ML.EVALUATE(MODEL `linear-facet-257019.the_look_ecommerce_k_means.k_means_test`)
+```
+I created a table in excel with the the columns: Centroids, Mean Squared Distance, Normalized Points, Normalized Distance, and Straight Y. Below is the table and a description of each column:
+* ![Elbow_Method_Table](Assets/Elbow_Method_Table.png)
+   * Centroids: The number of centroids
+   * Mean Squared Distance: The mean squared distance that the model retured for each number of centroids.
+   * Normalized points: In cell c2 I put the formula =(A2-$A$2)/($A$5-$A$2) and dragged it to autofill the cells below. This formula calculates the distance from the minimum and divides it by the difference between the minimum and maximum. This allows me to plot the point values on a standard scale for a visual.
+   * Normalized distance: I apply the same logic that I applied to the Normalized Points column to the Mean Squared Distance column with the formula =(B2-$B$5)/($B$2-$B$5). This allows me to plot mean squared distance on the same visual.
+   * Straight Y: The goal of this column is to create values that draw a straight line from my first plotted centroid to my last plotted centroid. I do this with the formula =(C2*-1)+1. This creates the y coordinate for each normalized centroid number by subtracting the normalized centroid number from 1.
+   * I plot this table using the following chart:
+      * ![Elbow_Chart](Assets/Elbow_Chart.png)
+         * The arrow shows that the distance between centroid 3 and the nearest point on the straight line is the greatest. Therefore, this is where the most drastic slow down in cluster tightening occurs. I will move forward with my analyses using 3 centroids. 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
 I use Google Sheets to sort tasks based on priority creating a dynamic todo list that always brings the highest priority task to the top.
