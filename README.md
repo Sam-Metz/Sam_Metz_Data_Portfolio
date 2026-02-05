@@ -280,7 +280,10 @@ I created a table in excel with the the columns: Centroids, Mean Squared Distanc
    * Straight Y: The goal of this column is to create values that draw a straight line from my first plotted centroid to my last plotted centroid. I do this with the formula =(C2*-1)+1. This creates the y coordinate for each normalized centroid number by subtracting the normalized centroid number from 1.
    * I plot this table using the following chart:
       * ![Elbow_Chart](Assets/Elbow_Chart.png)
-         * The arrow shows that the distance between centroid 3 and the nearest point on the straight line is the greatest. Therefore, this is where the most drastic slow down in cluster tightening occurs. I will move forward with my analyses using 3 centroids. 
+         * The arrow shows that the distance between centroid 3 and the nearest point on the straight line is the greatest. Therefore, this is where the most drastic slow down in cluster tightening occurs. I will move forward with my analyses using 3 centroids.
+
+### Centroid Assignment
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
 I use Google Sheets to sort tasks based on priority creating a dynamic todo list that always brings the highest priority task to the top.
