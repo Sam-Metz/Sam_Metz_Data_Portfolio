@@ -283,6 +283,41 @@ I created a table in excel with the the columns: Centroids, Mean Squared Distanc
          * The arrow shows that the distance between centroid 3 and the nearest point on the straight line is the greatest. Therefore, this is where the most drastic slow down in cluster tightening occurs. I will move forward with my analyses using 3 centroids.
 
 ### Centroid Assignment
+I assigned each customer in my formatted table to their centroid using the following query:
+```sql
+SELECT 
+  * Except(nearest_centroids_distance)
+FROM
+  ML.PREDICT
+    (MODEL `linear-facet-257019.the_look_ecommerce_k_means.k_means_test_3`, 
+      (SELECT
+        *
+      FROM
+       `linear-facet-257019.the_look_ecommerce_k_means.formatted_table_k_means`))
+```
+### Power BI Analyses
+#### Centroid Group Size
+I want to show my stakeholders how many customers fall within each centroid group. I started by creating 3 measures that count the number of centroids in each group. The dax code for the group 1 measure is shown below. The measures for groups 2 and 3 follow the same format, but are applied to their group.
+![Centroid_count_1_measure](Assets/centroid_count_1_measure.png)
+Power BI does not allow sufficient control over the visual if I merely create a bar graph and drag these measures in to the visual directly. Therefore, I will need to create a table and apply a switch measure that replaces the table values with the measures above. Below is the table I created manually to start this process. I created this using the "enter data" option in Power BI.
+![Centroid_count_switch_table](Assets/Centroid_count_switch_table.png)
+Then, I applied the following switch measure to the manually created table. Most of the visuals within this project were created using the same method. Moving forward, I will call this the "switch method"
+![Centroid_count_switch_measure](Assets/centroid_count_switch_measure.png)
+I created a bar chart, dragged the switch measure to the y-axis, and dragged the centroid category from the manually created table to the x-axis. I formatted the chart by color coding the bars, adding data labels, changing the title and labeling each axis. Below is the resulting chart. It shows that the centroid groups order from largest to smallest:
+![Centroid_count_chart](Assets/Centroid_count_bar_chart.png)
+I split my report in to 5 pages. The group size chart above goes in the size page of the report:
+![Report_pages](Assets/Report_pages.png)
+
+#### Total Spend Per Group
+I want to show my stakeholders the total amount that has been spent by each group. I use the same switch method applied to group size above. I start by creating a total spend measure for each group:
+![Total_spend_measure](Assets/Total_spend_measure.png)
+I create a table with the total spend category values:
+![Total_spend_table](Assets/Total_spend_table.png)
+I apply the following total spend switch measure to this table:
+![Total_spend_switch_measure](Assets/Total_spend_switch_measure.png)
+I pull the total spend switch measure to the y-axis and the total spend category to the x-axis. After formatting, below is the resulting table. It shows that group 1 (the largest centroid group) spends the most. However, group 3 (the smallest centroid group) is not far behind. I keep my group color-coding consistent throughout my report. This chart goes on the revenue page of the report. 
+![Total_spend_chart](Assets/Total_spend_chart.png)
+
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
