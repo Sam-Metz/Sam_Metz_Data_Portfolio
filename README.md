@@ -356,7 +356,18 @@ FROM
    * ![days_since_last_purchase_measure](Assets/days_since_last_purchase_measure.png)
 * I create the average days table for the switch method:
    * ![days_since_last_purchase_table](Assets/days_switch_table.png)
-* 
+* I created a days since last purchase switch measure:
+   * ![days_switch_measure](Assets/days_switch_measure.png)
+* I applied the switch measure to a bar graph and formatted the following visual. This shows that group 3 customers make purchases most frequently:
+   * ![days_chart](Assets/days_chart.png)
+
+##### Purchase Behavior Final Report Page
+* Below is the final report page that I will share with my stakeholders. The visuals show that centroid group 3 spends the most per person, spends the most per order, and places the most orders per person. The average customer in group 3 also places orders more frequently than the other groups:
+   * ![aaverages_report_full_page](Assets/averages_report_full_page.png)
+
+##### Revenue Potential
+* I want to summarize the insights found from analyzing the customer purchase behaviors using a visual for my stakeholders. The visual will be a bar chart with one bar per centroid group. The size of these bars will be controlled by a toggle that adds a specified number of customers to all of the groups. The bars will show how much revenue is added when each of the groups grow by the amount of people specified in the toggle.
+* ![rev_potential_video](Assets/rev_potential_video.mp4)
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
