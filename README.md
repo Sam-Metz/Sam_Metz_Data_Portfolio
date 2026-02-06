@@ -367,7 +367,21 @@ FROM
 
 ##### Revenue Potential
 * I want to summarize the insights found from analyzing the customer purchase behaviors using a visual for my stakeholders. The visual will be a bar chart with one bar per centroid group. The size of these bars will be controlled by a toggle that adds a specified number of customers to all of the groups. The bars will show how much revenue is added when each of the groups grow by the amount of people specified in the toggle.
-* [![Watch the video](https://img.youtube.com)](https://youtu.be/Po5_Bo22NQU)
+   * To create this visual, I started by creating the customers added toggle. I did this using the new parameter funtion in Power BI:
+      * ![customer_adder_toggle](Assets/customer_adder_toggle.png)
+   * Then, I created a revenue portential measure for each group by executing the steps below.
+      * create a person count variable which is the count of customers when the data is filtered the specified centroid id.
+      * create a current rev variable which is sum of total spend when the data is filtered to the specified centroid id.
+      * create and average spend variable: divide the current rev variable by the person count variable.
+      * create an additional rev variable: multiply the average spend variable by the amount specified in the toggle.
+      * return the additional rev variable value.
+      * ![rev_potential_meausre](Assets/rev_potential_measure.png)
+   * After executing these steps for all three centroid groups, I created a revenue potential table for the switch method:
+      * ![rev_potential_switch_table](Assets/rev_potential_switch_table.png)
+   * Finally, I applied the following switch measure to the table:
+      * ![rev_potential_switch_meausre](Assets/rev_potential_switch_measure.png)
+   * I applied this measure to a bar graph and formatted the visual as shown in the video below. This highlights that the company will grow their revenue more quickly if they increase the size of group three than they will if they increase the size of the other groups. 
+      * [![Watch the video](https://img.youtube.com)](https://youtu.be/Po5_Bo22NQU)
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
