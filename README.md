@@ -21,10 +21,15 @@ In order to do complete this mission, I will need to combine these tables in to 
 The relevant tables for my analyses are order_items, users, and products. Below is a sample of each in their original format:
 
  * order_items: Includes information about the line items included on each order
+<br>
     *  ![Order Items](Assets/order_items_table.png)
+<br>
  *  users: Includes Information about each customer
+<br>
     *  ![users](Assets/users_table.png)
+<br>
  *  products: Includes details about the products sold by the company
+<br>
     * ![Order Items](Assets/products_table.png)
 
 I applied the following query to these tables to create my formatted table. My notes for each part of the query are included in the sql code:
