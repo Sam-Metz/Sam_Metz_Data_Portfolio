@@ -367,7 +367,7 @@ FROM
 
 ##### Revenue Potential
 * I want to summarize the insights found from analyzing the customer purchase behaviors using a visual for my stakeholders. The visual will be a bar chart with one bar per centroid group. The size of these bars will be controlled by a toggle that adds a specified number of customers to all of the groups. The bars will show how much revenue is added when each of the groups grow by the amount of people specified in the toggle.
-* ![rev_potential_video](Assets/rev_potential_video.mp4)
+* [![Watch the video](https://img.youtube.com)]((https://youtu.be/Po5_Bo22NQU))
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
