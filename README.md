@@ -338,9 +338,25 @@ FROM
    * ![Average_order_spend_switch_table](Assets/average_order_spend_switch_table.png)
 * I apply an average order spend switch measure to the table:
    * ![Average_order_spend_switch_measure](Assets/average_order_spend_switch_measure.png)
-* I apply the switch measure to a bar chart and format the bar chart to get the following visual:
+* I apply the switch measure to a bar chart and format the bar chart to get the following visual. This shows that group 3 has the largest average order spend:
    * ![Average_order_spend_chart](Assets/average_order_spend_chart.png)
 
+##### Avg. Number of Orders Per Person
+* I create and average number of orders per person measure for each group. This counts the number of orders for the group specified as a total order count variable, counts the number of customers in that group as a customer count variable and then divides the order count variable by the customer count variable:
+   * ![Average_order_count_measure](Assets/average_order_count_measure.png)
+* I create an average order count table for the switch method:
+   *  ![Average_order_count_table](Assets/average_order_count_switch_table.png)
+*  I create an average order count switch measure:
+   *  ![Average_order_count_switch_measure](Assets/average_order_count_switch_measure.png)
+*  I apply this measure to a bar chart and format the visual. This shows that group 3 places the most orders per person:
+   * ![Average_order_count_chart](Assets/average_order_count_chart.png)
+
+##### Avg. Days Since Last Purchase
+* I create the a measure that shows average days from last purchase for each group. This measure calculates total days from the days since last purchase column of the data for each group and stores it in a variable, counts the customers per group and stores it in a variable, and then divides the total days variable by the customer count variable:
+   * ![days_since_last_purchase_measure](Assets/days_since_last_purchase_measure.png)
+* I create the average days table for the switch method:
+   * ![days_since_last_purchase_table](Assets/days_switch_table.png)
+* 
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
