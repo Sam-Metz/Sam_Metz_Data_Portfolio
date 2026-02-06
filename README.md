@@ -297,16 +297,16 @@ FROM
 ```
 ### Power BI Analyses
 #### Centroid Group Size
-I want to show my stakeholders how many customers fall within each centroid group. I started by creating 3 measures that count the number of centroids in each group. The dax code for the group 1 measure is shown below. The measures for groups 2 and 3 follow the same format, but are applied to their group.
-![Centroid_count_1_measure](Assets/centroid_count_1_measure.png)
-Power BI does not allow sufficient control over the visual if I merely create a bar graph and drag these measures in to the visual directly. Therefore, I will need to create a table and apply a switch measure that replaces the table values with the measures above. Below is the table I created manually to start this process. I created this using the "enter data" option in Power BI.
-![Centroid_count_switch_table](Assets/Centroid_count_switch_table.png)
-Then, I applied the following switch measure to the manually created table. Most of the visuals within this project were created using the same method. Moving forward, I will call this the "switch method"
-![Centroid_count_switch_measure](Assets/centroid_count_switch_measure.png)
-I created a bar chart, dragged the switch measure to the y-axis, and dragged the centroid category from the manually created table to the x-axis. I formatted the chart by color coding the bars, adding data labels, changing the title and labeling each axis. Below is the resulting chart. It shows that the centroid groups order from largest to smallest:
-![Centroid_count_chart](Assets/Centroid_count_bar_chart.png)
-I split my report in to 5 pages. The group size chart above goes in the size page of the report:
-![Report_pages](Assets/Report_pages.png)
+* I want to show my stakeholders how many customers fall within each centroid group. I started by creating 3 measures that count the number of centroids in each group. The dax code for the group 1 measure is shown below. The measures for groups 2 and 3 follow the same format, but are applied to their group.
+   * ![Centroid_count_1_measure](Assets/centroid_count_1_measure.png)
+* Power BI does not allow sufficient control over the visual if I merely create a bar graph and drag these measures in to the visual directly. Therefore, I will need to create a table and apply a switch measure that replaces the table values with the measures above. Below is the table I created manually to start this process. I created this using the "enter data" option in Power BI.
+   * ![Centroid_count_switch_table](Assets/Centroid_count_switch_table.png)
+* Then, I applied the following switch measure to the manually created table. Most of the visuals within this project were created using the same method. Moving forward, I will call this the "switch method"
+   * ![Centroid_count_switch_measure](Assets/centroid_count_switch_measure.png)
+* I created a bar chart, dragged the switch measure to the y-axis, and dragged the centroid category from the manually created table to the x-axis. I formatted the chart by color coding the bars, adding data labels, changing the title and labeling each axis. Below is the resulting chart. It shows that the centroid groups order from largest to smallest:
+   * ![Centroid_count_chart](Assets/Centroid_count_bar_chart.png)
+* I split my report in to 5 pages. The group size chart above goes in the size page of the report:
+   * ![Report_pages](Assets/Report_pages.png)
 
 #### Total Spend Per Group
 I want to show my stakeholders the total amount that has been spent by each group. I use the same switch method applied to group size above. I start by creating a total spend measure for each group:
