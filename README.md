@@ -309,37 +309,37 @@ FROM
    * ![Report_pages](Assets/Report_pages.png)
 
 #### Total Spend Per Group
-I want to show my stakeholders the total amount that has been spent by each group. I use the same switch method applied to group size above. I start by creating a total spend measure for each group:
-![Total_spend_measure](Assets/Total_spend_measure.png)
-I create a table with the total spend category values:
-![Total_spend_table](Assets/Total_spend_table.png)
-I apply the following total spend switch measure to this table:
-![Total_spend_switch_measure](Assets/Total_spend_switch_measure.png)
-I pull the total spend switch measure to the y-axis and the total spend category to the x-axis. After formatting, below is the resulting table. It shows that group 1 (the largest centroid group) spends the most. However, group 3 (the smallest centroid group) is not far behind. I keep my group color-coding consistent throughout my report. This chart goes on the revenue page of the report. 
-![Total_spend_chart](Assets/Total_spend_chart.png)
+* I want to show my stakeholders the total amount that has been spent by each group. I use the same switch method applied to group size above. I start by creating a total spend measure for each group:
+   * ![Total_spend_measure](Assets/Total_spend_measure.png)
+* I create a table with the total spend category values:
+   * ![Total_spend_table](Assets/Total_spend_table.png)
+* I apply the following total spend switch measure to this table:
+   * ![Total_spend_switch_measure](Assets/Total_spend_switch_measure.png)
+* I pull the total spend switch measure to the y-axis and the total spend category to the x-axis. After formatting, below is the resulting table. It shows that group 1 (the largest centroid group) spends the most. However, group 3 (the smallest centroid group) is not far behind. I keep my group color-coding consistent throughout my report. This chart goes on the revenue page of the report. 
+   * ![Total_spend_chart](Assets/Total_spend_chart.png)
 
 #### Purchase Behavior
-I want to show my stakeholders the average spend per person, average spend per order, average number of orders per person, and the average days since last purchase for the customers in each group. 
+* I want to show my stakeholders the average spend per person, average spend per order, average number of orders per person, and the average days since last purchase for the customers in each group. 
 
 ##### Avg. Spend Per Person
-I create an average spend per person measure for each group. These measures create a total spend variable (the total spend when the data is filtered to the specified group), at total person count variable (the count of users when the data is filtered to the specified group), and then divide the total spend variable by the total person count variable:
-![Average_spend_per_person_measure](Assets/Average_spend_per_person_measure.png)
-I start the switch method by creating and average spend per person category table:
-![Average_spend_per_person_switch_table](Assets/average_spend_per_person_switch_table.png)
-I apply an average spend per person swith measure to the table:
-![Average_spend_per_person_switch_measure](Assets/average_spend_per_person_switch_measure.png)
-I drag the average spend per person switch measure to the y axis and the table category to the x axis. After formatting, the chart below shows that centroid group 3 spends the most money per person:
-![Average_spend_per_person_chart](Assets/average_spend_per_person_chart.png)
+* I create an average spend per person measure for each group. These measures create a total spend variable (the total spend when the data is filtered to the specified group), at total person count variable (the count of users when the data is filtered to the specified group), and then divide the total spend variable by the total person count variable:
+   * ![Average_spend_per_person_measure](Assets/Average_spend_per_person_measure.png)
+* I start the switch method by creating and average spend per person category table:
+   * ![Average_spend_per_person_switch_table](Assets/average_spend_per_person_switch_table.png)
+* I apply an average spend per person swith measure to the table:
+   * ![Average_spend_per_person_switch_measure](Assets/average_spend_per_person_switch_measure.png)
+* I drag the average spend per person switch measure to the y axis and the table category to the x axis. After formatting, the chart below shows that centroid group 3 spends the most money per person:
+   * ![Average_spend_per_person_chart](Assets/average_spend_per_person_chart.png)
 
 ##### Avg. Order Spend
-I create an average order spend measure for each group:
-![Average_order_spend_measure](Assets/average_order_spend_measure.png)
-I create a category table for the swith method:
-![Average_order_spend_switch_table](Assets/average_order_spend_switch_table.png)
-I apply an average order spend switch measure to the table:
-![Average_order_spend_switch_measure](Assets/average_order_spend_switch_measure.png)
-I apply the switch measure to a bar chart and format the bar chart to get the following visual:
-![Average_order_spend_chart](Assets/average_order_spend_chart.png)
+* I create an average order spend measure for each group:
+   * ![Average_order_spend_measure](Assets/average_order_spend_measure.png)
+* I create a category table for the swith method:
+   * ![Average_order_spend_switch_table](Assets/average_order_spend_switch_table.png)
+* I apply an average order spend switch measure to the table:
+   * ![Average_order_spend_switch_measure](Assets/average_order_spend_switch_measure.png)
+* I apply the switch measure to a bar chart and format the bar chart to get the following visual:
+   * ![Average_order_spend_chart](Assets/average_order_spend_chart.png)
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
