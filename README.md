@@ -383,6 +383,33 @@ FROM
    * I applied this measure to a bar graph and formatted the visual as shown in the video below. This highlights that the company will grow their revenue more quickly if they increase the size of group three than they will if they increase the size of the other groups. 
       * [![Watch the video](https://img.youtube.com)](https://youtu.be/Po5_Bo22NQU)
 
+#### Marketing
+* Now that my stakeholders know it would make business sense to increase the size of group 3, I will show them the key characteristics of group 3. This will help them begin an effective marketing campaign. I will create a marketing page within the report that shows the gender distribution, age distribution, percentage of purchases from each category, and geographic distribution for each of the groups. The visuals on this page will be controlled by a slicer that changes the visuals to reflect the chosen group.
+
+##### Slicer 
+* I create the slicer and drag the Centroid id column name from the data set in to the field:
+   * ![marketing_slicer](Assets/marketing_slicer.png)
+
+##### Gender
+* I will show the gender distribution for centroid group 3:
+   *  I start by creating the following measure for males and females in the specified group. THis measure creates a total id variable that count the customers when then centroid id column is filtered to the selected value in the slicer, creates a gender count variable that counts the customers when the centroid id is equal to the value in the slicer and gender column is filtered to the applicable gender, and divides the gender count variable by the total id variable:
+      *  ![gender_measure](Assets/gender_measure.png)
+   *  I create a pie chart visual and drag the female and male measures in to the value field:
+      *  ![gender_visual_build](Assets/gender_visual_build.png)
+   *  This results in the following visual which shows that group 3 is made up of 82.7% males and 17.3% females:
+      *  ![gender_chart](Assets/gender_chart.png)
+
+##### Age
+* I will create a bar chart that shows the age distribution for each group:
+   * The customers within this data set are ages 12-70. I will split them in to 10 year ranges. I create measures for each age range. These measures create a variable that counts the number of customers when the data is filtered to the cetroid id specified in the slicer and the age falls within the applicable range, a variable that counts the total customers when the data is filtered to the group chosen in the slicer, and divides the age range count variable by the total count variable. This what percentage of customers from the chosen group fall within each age range:
+      * ![age_measure](Assets/age_measure.png)
+   * Then, I create an age category table for the switch method:
+      * ![age_table](Assets/age_table.png)
+   * I apply a switch measure to the age category table:
+      * ![age_switch_measure](Assets/age_switch_measure.png)
+   * I create a bar chart, pull the switch measure to the x-axis, the age category to the y-axis, and format the visual. This results in the following chart. It shows an even distribution of ages for group 3:
+      * ![age_chart](Assets/age_chart.png)
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
 I use Google Sheets to sort tasks based on priority creating a dynamic todo list that always brings the highest priority task to the top.
