@@ -50,7 +50,9 @@ Spend AS
             order_id)
       GROUP BY
         user_id)
-    /*Spend creates an order table that calculates the total price of each order (excluding cancelled orders) in the order_items table. The order table has one row for each order. It shows the user id for each order as well. The outer query calculates the total spend and average spend per customer based on the temporary inner table. */,
+    /*Spend creates an order table that calculates the total price of each order (excluding cancelled orders) in the order_items table.
+The order table has one row for each order. It shows the user id for each order as well.
+The outer query calculates the total spend and average spend per customer based on the temporary inner table. */,
 Last_Purchase AS 
       (SELECT
         DATE_DIFF(CURRENT_DATE(), DATE(MAX(created_at)), DAY) AS days_since_last_purchase,
