@@ -683,8 +683,17 @@ A task's priority is determined by it's importance category (where does the task
    * ![roster](Assets/roster.png)
 
 #### Event Scorecards
-* Below is an example of the foot race scorecard tab. Column B use a vlookup formula like: =vlookup(A3,Roster!A:F,2,false) to reference the names in the roster:
-   * 
+* Below is an example of the foot race scorecard tab. Column B use a vlookup formula like: =vlookup(A3,Roster!A:F,2,false) to reference the names in the roster. I color code the tabs to make them easier to navigate:
+   * ![event_scorecard](Assets/event_scorecard.png)
+
+#### Team Scorecards
+* Below is an example that shows the formulas for the team yellow scorecard
+   * Column b references the number in column a as it occurs on the roster and returns that participant's name. The first cell of column B has "YELLOW POINTS" manually entered for reference later.
+   * The event columns C-K reference the name in column B as it occurs in the event scorecard tabs. The vlookup formulas in these columns return the point values for the event and participant being referenced. "YELLOW POINTS" is used on the event scorecards to label instances when the team earned points that are not tied to an individual participant.
+   * The total column sums all of the points for that row to show the total points for each participany. The total row totals the points for each column to show the total points that the team earned for that event. Where the total column and row meet, all of the team's points are added to get the full total for the team.
+      * ![team_yellow_formulas](Assets/team_yellow_formulas.png)
+   * The image below shows the values instead of the formulas:
+      * ![team_yellow_scorecard](Assets/team_yellow_scorecard.png)
 
 
 
