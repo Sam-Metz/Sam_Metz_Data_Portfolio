@@ -449,6 +449,7 @@ FROM
  ### Final Insight
  * I would recommend that my stakeholders attempt to increase the size of centroid group 3 since the company makes the most profit off of these customers. Group 3 is made up of mostly males in China and the U.S. They are evenly distributed accross all age groups. They mostly spend their money on bottoms, tops, and outerwear. Therefore, the company should market these products to these groups. 
 
+[Home](#sam-metz-data-portfolio)
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
