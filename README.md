@@ -621,7 +621,43 @@ A task's priority is determined by it's importance category (where does the task
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## Family Olympics Scoreboard
+* Our family has planned a weekend reunion where teams will compete in athletic events. I am in charge of making the scoreboard. There will be 5 teams: Green, Orange, Red, Blue, and Yellow. There will be 6 events: Fitness, Talent Show, Car Pull, Foot Race, Pellet Shoot, and Family Feud. 
 
+### Scoring Structure
+#### Fitness
+* The teams will compete in a fitness relay race with calisthenic challenges:
+   * First Place Team: 100 points
+   * Second Place Team: 50 points
+   * Third Place Team: 25 points
+   * If a Team is represented by at least 2 participants: 50 points
+   * If all members of a team participate: 150 points
+
+#### Talent Show
+* Team members will partner up and coordinate talent show acts to perform in front of everyone. Once all acts have been performed, participants will vote for their favorites in each category:
+   * If a team performs 2 or more acts: 50 points
+   * If an act includes all members of a team: 150 points
+   * Voted best costume: 50 points
+   * Voted most original concept: 50 points
+   * voted highest skill level: 50 points
+   * voted most entertaining: 50 points
+
+#### Car Pull
+* Teams will compete to pull a car 50 yards:
+   * Fastest Team: 150 points
+   * Second Fastest Team: 75 points
+   * Third Fastest team: 25 points
+
+#### Foot Race 
+* Participants will race .5 miles. If a team's participant falls in to any of the following categories, the team will be awarded the adjacent point value. After summing the total points for each team, the team with the most points will get 150 points. The team with the second most points will get 75 points:
+   * First Female: 5 points
+   * First Male: 5 points
+   * First Over 50: 3 points
+   * First Cousin: 3 points
+   * First Kids: 3 points
+   * Participation: 2 points
+
+ #### Pellet Shoot
+ * Participants will
 
 
 
