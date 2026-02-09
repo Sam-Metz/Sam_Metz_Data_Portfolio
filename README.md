@@ -657,7 +657,34 @@ A task's priority is determined by it's importance category (where does the task
    * Participation: 2 points
 
  #### Pellet Shoot
- * Participants will
+ * Participants will shoot at targets with varying point values:
+    * First place team: 150 points
+    * Second place team: 75 points
+
+#### Family Feud
+* Participants will compete in family trivia:
+   * Each question will be worth a different number of points. Participants will earn that question's point value for their team when they answer the question correctly.
+
+#### Extra Point Activities
+* Puzzles: Each complete puzzle will earn the team 50 points
+* Raft Up: Each person that goes in to the lake will earn their team 5 points
+* Idols: Each idol found will earn the team 30 points
+
+### Data Sources and Flow
+1. A roster tab within a Google Sheets document will show who is on each team
+2. Event staff will fill out a printed event scorecard based on the results of each event or extra point activity. These scorecards will be submitted to me.
+3. I will fill out a google sheets table based on the print outs. In the final product, each event scorecard will have its own tab. The team members on all tabs will reference the roster.
+4. Each team will also have their own tab. The team tabs will reference the event scorecards and total the team's points.
+5. A scoreboard source tab will reference the team totals and bring them in to one table.
+6. A scorecoard tab will reference the scorecoard source table to create a dynamic bar chart visual where each team is represented by one bar. The size of a teams bar will change based on the number of points they have. The team with the most points wins.
+
+#### Roster
+* The rostered is filled out manually based on the team assignments
+   * ![roster](Assets/roster.png)
+
+#### Event Scorecards
+* Below is an example of the foot race scorecard tab. Column B use a vlookup formula like: =vlookup(A3,Roster!A:F,2,false) to reference the names in the roster:
+   * 
 
 
 
