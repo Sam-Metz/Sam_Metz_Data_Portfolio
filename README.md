@@ -412,6 +412,42 @@ FROM
    * I create a bar chart, pull the switch measure to the x-axis, the age category to the y-axis, and format the visual. This results in the following chart. It shows an even distribution of ages for group 3:
       * ![age_chart](Assets/age_chart.png)
 
+##### Purchase Categories
+* I will create a bar chart that shows what percentage of purchases fell in to each category per group:
+   * The data set includes 27 product categories. I reduce this to 10 sub categories for simplification as shown below:
+      * ![sub_category_table](Assets/sub_category_table.png)
+   * I create 10 measures like the one below for bottoms. This measure creates a variable called categorycount which filters the data to the chosen centroid group in the slicer and then sums the purchase categories where each of the applicable sub categories are listed. Then, it creates a total item variable which sums all of the items purchased when the data is filtered to the centroid id selected in the slicer. Last, the measure divides the category count variable by the total item count variable. This shows the percentage of items that the selected group purchased which fell within the applicable category:
+      * ![bottoms_measure](Assets/bottoms_measure.png)
+   * Manually repeating the measure creation process above for 10 category measure was too tedious. Therefore, I created an excel table and used concatenate to create the measures. As shown below, I put the sub categories incolumns A-F, the new category name in column G, and each measure component in columns I-K. The measure components were similar across all of the measures so these could be easily autofilled to the cells below. The only difference between the measures was the sub category names. Once the table was filled with this data, I applied this concatenate formula: =CONCAT(H5,G5,I5,F5,J5,E5,J5,D5,K5) to the bottoms category row and autofilled the other cells in the concat column. The snip below shows the table contents for the bottoms and dresses_suits categories:
+      * ![categories_measure_concat_table](Assets/categories_measure_concat_table.png)
+   * Once the measures were created, I prepared for the switch method by creating a switch table for the categories:
+      * ![category_switch_table](Assets/category_switch_table.png)
+   * I applied the following switch measure to the table:
+      * ![category_switch_measure](Assets/category_switch_measure.png)
+   * I applied the switch measure to a bar chart and formatted the visual. This resulted in the visual below. This shows that centroid group 3 (shown in the centroid slicer on the report page) purchases most items from the bottoms category. They also make a significant portion of purchases from the topa and outerwear categories:
+      * ![category_chart](Assets/category_chart.png)
+
+##### Countries
+* I will create a bar chat that shows what percentage of customers from each group are from a given country. I will follow use the same measure creation method that I used for the purchase categories to create the measures for the countries. The country measures will be easier since they do not involve sub categories. I will start by filling an excel table with the country names and measure parts. I will apply the concatenate formula to create the measures for each country as shown below:
+   * ![country_concat_table](Assets/country_concat_table.png)
+* I create the measures in Power BI for each country like the one shown below for China:
+   * ![country_measure](Assets/country_measure.png)
+* I created a country table for the switch method:
+   * ![country_table](Assets/country_table.png)
+* I appllied the following switch measure to this table:
+   * ![country_switch_measure](Assets/country_switch_measure.png)
+* I applied the switch measure to a bar chart and formatted the visual. This resulted in the chart below. It shows that centroid group 3 (shown in the centroid slicer on the report page) is made up of mostly people who are from China or the U.S.
+   * ![country_chart](Assets/country_chart.png)
+
+##### Marketing Report Page
+* Below is the final maketing page of the report for centroid group 3. The video shows how a stakeholder can interact with the visuals by using the slicer:
+   * ![marketing_report_page](Assets/marketing_report_page.png)
+   * [![Watch the video](https://img.youtube.com)](https://youtu.be/rantKFGpvyY)
+
+ ### Final Insight
+ * I would recommend that my stakeholders attempt to increase the size of centroid group 3 since the company makes the most profit off of these customers. Group 3 is made up of mostly males in China and the U.S. They are evenly distributed accross all age groups. They mostly spend their money on bottoms, tops, and outerwear. Therefore, the company should market these products to these groups. 
+
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 ## Priority Sort
 I use Google Sheets to sort tasks based on priority creating a dynamic todo list that always brings the highest priority task to the top.
