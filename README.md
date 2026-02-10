@@ -687,7 +687,7 @@ A task's priority is determined by it's importance category (where does the task
    * ![event_scorecard](Assets/event_scorecard.png)
 
 #### Team Scorecards
-* Below is an example that shows the formulas for the team yellow scorecard
+* Below is an example that shows the formulas for the team yellow scorecard. One of these will be made for each team.
    * Column b references the number in column a as it occurs on the roster and returns that participant's name. The first cell of column B has "YELLOW POINTS" manually entered for reference later.
    * The event columns C-K reference the name in column B as it occurs in the event scorecard tabs. The vlookup formulas in these columns return the point values for the event and participant being referenced. "YELLOW POINTS" is used on the event scorecards to label instances when the team earned points that are not tied to an individual participant.
    * The total column sums all of the points for that row to show the total points for each participany. The total row totals the points for each column to show the total points that the team earned for that event. Where the total column and row meet, all of the team's points are added to get the full total for the team.
@@ -695,6 +695,15 @@ A task's priority is determined by it's importance category (where does the task
    * The image below shows the values instead of the formulas:
       * ![team_yellow_scorecard](Assets/team_yellow_scorecard.png)
 
+#### Scoreboard Source
+* I create a scoreboard source table in a new tab. This will feed data to the final visual. The snip below shows how formulas like =vlookup(A2,'Team Green'!B:L,11,false) are used to reference the team name in column A and return the total points for that team:
+   * ![scoreboard_source](Assets/scoreboard_source.png)
+* Below is the final product of the scoreboard source tab showing the values:
+   * ![scoreboard_source_values](Assets/scoreboard_source_values.png)
+
+#### Final Scoreboard
+* Lastly, I create a scoreboard tab. I add a stacked bar chart that referenced the data from the scoreboard source tab. I use customize series to color code the bars and text for each team. As the scorecards for each even are updated, the bars on the scoreboard change in size to reflect the points for each team. During the competition, I plugged my computer in to a tv via hdmi and split my screens. I opened 2 duplicate web broswer tabs of the google sheet. On one screen, I displayed the scoreboard, on the other, I edited the scorecards accordingly. That way, everyone could see their most current score via dynamic visual:
+   * ![final_scoreboard](Assets/final_scoreboard.png)
 
 
 
