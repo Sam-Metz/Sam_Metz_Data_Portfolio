@@ -1,23 +1,23 @@
 # Sam Metz Data Portfolio
 Thank you for visiting my data portoflio. 
 * Projects (click the link to view the project. click "home" at the end of any section to return here)
-    * [K Means Customer Analyses](#k-means-customer-analyses)
-    * [Coursera Case Study](#coursera-case-study)
-    * [Priority Sort Calculator](#priority-sort)
-    * [Family Olympics Scoreboard](#family-olympics-scoreboard)
+    * [K-means Customer Analyses](#k-means-customer-analyses) : SQL Big Query, Excel and Power BI
+    * [Coursera Case Study](#coursera-case-study) : SQL Big Query, Excel, Tableau
+    * [Priority Sort Calculator](#priority-sort) : Google Sheets
+    * [Family Olympics Scoreboard](#family-olympics-scoreboard) : Google Sheets
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-## K Means Customer Analyses
-* I use a k means to analyze a sample data set provided by Big Query. 
+## K-means Customer Analyses
+* I use a K-means to analyze a sample dataset provided by Big Query. 
 
 ### The Dataset
-* I am working with the_look_ecommerce dataset in Big Query. It consists of 8 tables with sample data for a business. The tables include distribution_centers, events, inventory_items, order_items, products, thelook_ecommerce-table, and users. 
+* I am working with the_look_ecommerce dataset in Big Query. It consists of 8 tables with sample data for an online retailer. The tables include distribution_centers, events, inventory_items, order_items, products, thelook_ecommerce-table, and users. 
 
 ### Mission
-* My ultimate goal is to use K means to divide the customers in this data set in to groups based on their characteristics and purchase behaviors. This will allow my stakeholders to better understand their customer's and derive an effective marketing plan to increase revenue for the company. 
+* My ultimate goal is to use K-means to divide the customers in this dataset in to groups based on their characteristics and purchase behaviors. This will allow my stakeholders to better understand their customers and derive an effective marketing plan to increase revenue for the company. 
 
 ### Plan
-* In order to do complete this mission, I will need to combine these tables in to one table that has one row per user and columns for each characteristic that I want the model to consider. I will use the elbow method to determine the optimal number of centroids. After deciding on the number of centroids, I will run the model with that number and assign each customer to a centroid in my formatted table. I will upload this table to Power BI and create visuals to display the insights to my stakeholders.
+* In order to complete this mission, I will need to combine these tables in to one table that has one row per user and columns for each characteristic that I want the model to consider. I will use the elbow method to determine the optimal number of centroids. After deciding on the number of centroids, I will run the model with that number and assign each customer to a centroid in my formatted table. I will upload this table to Power BI and create visuals to display the insights to my stakeholders.
 
 ### Preparation
 * The relevant tables for my analyses are order_items, users, and products. Below is a sample of each in their original format:
@@ -65,7 +65,8 @@ Last_Purchase AS
           status <> 'Cancelled'
           GROUP BY
             user_id)
-      /*Last_Purchase finds the difference between the maximum created date and the current date for each order (excluding cancelled) in the order_items table and groups by user id to show the days since last purchase for each user*/,
+      /*Last_Purchase finds the difference between the maximum created date and the current date for each order (excluding cancelled)
+in the order_items table and groups by user id to show the days since last purchase for each user*/,
 Country AS
       (SELECT
         *
@@ -79,7 +80,10 @@ Country AS
         )
         PIVOT (max(flag) FOR country IN ( 'Brasil',  'Japan',  'United States',  'Colombia',  'Spain',  'China',  'Australia',  'France',  'Germany',  'Belgium',  'South Korea',  'Poland',  'United Kingdom',  'Deutschland',  'Austria'
 )))
-      /*Country uses a one hot method do represent customer countries. It starts by creating a table that has a user id column and a country coumn. Each time the query finds a match between a user id and a country, it puts a 1 in the corresponding cell. Pivot the flips the data and creates a new table with one column per country. The maximum value in the list of country columns for each user is marked in the corresponding country column for that user. The query groups by user id by default.*/,
+      /*Country uses a One-hot method to represent customer countries. It starts by creating a table that has a user id column and a country coumn.
+Each time the query finds a match between a user id and a country, it puts a 1 in the corresponding cell. Pivot the flips the data
+and creates a new table with one column per country. The maximum value in the list of country columns for each user is marked in the corresponding
+country column for that user. The query groups by user id by default.*/,
 Category AS 
       (SELECT
        *
@@ -99,7 +103,9 @@ Category AS
         )
         PIVOT
           (SUM(flag) FOR Category IN( 'Accessories', 'Plus', 'Swim', 'Active', 'Socks & Hosiery', 'Socks', 'Dresses', 'Pants & Capris', 'Fashion Hoodies & Sweatshirts', 'Skirts', 'Blazers & Jackets', 'Suits', 'Tops & Tees', 'Sweaters', 'Shorts', 'Jeans', 'Maternity', 'Sleep & Lounge', 'Suits & Sport Coats', 'Pants', 'Intimates', 'Outerwear & Coats', 'Underwear', 'Leggings', 'Jumpsuits & Rompers', 'Clothing Sets')))
-      /*Category joins the products and order items tables so that we can reference the product categories for each purchase. It then uses a one hot method by flagging each instance where a user id makes a purchase from a given category. It, then, creates a table with one column per category that shows the number of times that each user makes a purchase from each category.*/
+      /*Category joins the products and order items tables so that we can reference the product categories for each purchase.
+It then uses a one hot method by flagging each instance where a user id makes a purchase from a given category. It, then, creates a table with one column
+per category that shows the number of times that each user makes a purchase from each category.*/
 SELECT 
           ANY_VALUE( CASE WHEN Lower(u.gender) = 'female' THEN 1
           WHEN Lower(u.gender) = 'male' THEN 0
@@ -201,7 +207,7 @@ This creates the following table. I have hidden all but 2 country columns and al
 * ![K means table](Assets/Formatted_K_Means_Table.png)
 
 ### Elbow Method
-For a successful k means analyses, it is imperative that I choose the right number of centroids. As I run the model with an increasing number of centroids, the mean squarred distance from the data points to their corresponding cluster will decrease. However, as I add centroids, the insights become more complex for my stakeholders. More specifically, 10 customer groups is just way too many customer groups to keep track of while 3 or 4 is much more manageable. I use the elbow method to determine when the rate of msd (mean squarred distance) decrease slows down drastically. The centroid number at which the slow down occurs will be the optimal number of centroids for the analyses. To begin, I saved the formatted table to Big Query and applied the following query to it. This runs the k means analyses with the number of centroids specified. The query code includes my description of each step. I ran with 2, 3, 4, 5, 6, 7, 8, 9, and 10 centroids. I saved the results of each model to big query:
+For a successful K-means analyses, it is imperative that I choose the right number of centroids. As I run the model with an increasing number of centroids, the mean squarred distance from the data points to their corresponding cluster will decrease. However, as I add centroids, the insights become more complex for my stakeholders. More specifically, 10 customer groups is just way too many customer groups to keep track of while 3 or 4 is much more manageable. I use the elbow method to determine when the rate of msd (mean squared distance) decrease slows down drastically. The centroid number at which the slow down occurs will be the optimal number of centroids for the analyses. To begin, I saved the formatted table to Big Query and applied the following query to it. This runs the K-means analyses with the number of centroids specified. The query code includes my description of each step. I ran with 2, 3, 4, 5, 6, 7, 8, 9, and 10 centroids. I saved the results of each model to Big Query:
 
 ```sql
 CREATE OR REPLACE MODEL
@@ -214,7 +220,8 @@ OPTIONS
     NUM_CLUSTERS = 2, 
   /*The number of centroids to use*/
     STANDARDIZE_FEATURES = TRUE 
-  /*Scales features being considered by the model. For example, a user's average order spend could be 100 but their country is only 1. Standardizing prevents the model from assigning more weight to the order spend than the country value. */
+  /*Scales features being considered by the model. For example, a user's average order spend could be 100 but their country is only 1.
+Standardizing prevents the model from assigning more weight to the order spend than the country value. */
   ) AS
 SELECT
   Gender,
@@ -275,11 +282,11 @@ SELECT
   FROM
     ML.EVALUATE(MODEL `linear-facet-257019.the_look_ecommerce_k_means.k_means_test`)
 ```
-I created a table in excel with the the columns: Centroids, Mean Squared Distance, Normalized Points, Normalized Distance, and Straight Y. Below is the table and a description of each column:
+I created a table in excel with the columns: Centroids, Mean Squared Distance, Normalized Points, Normalized Distance, and Straight Y. Below is the table and a description of each column:
 * ![Elbow_Method_Table](Assets/Elbow_Method_Table.png)
    * Centroids: The number of centroids
    * Mean Squared Distance: The mean squared distance that the model retured for each number of centroids.
-   * Normalized points: In cell c2 I put the formula =(A2-$A$2)/($A$5-$A$2) and dragged it to autofill the cells below. This formula calculates the distance from the minimum and divides it by the difference between the minimum and maximum. This allows me to plot the point values on a standard scale for a visual.
+   * Normalized points: In cell c2 I put the formula =(A2-$A$2)/($A$5-$A$2) and dragged it to autofill the cells below. This formula calculates the distance from the minimum and divides it by the difference between the minimum and maximum. This allows me to plot the point values on a standard scale for a visual. Ultimately, I replace the scaled point values with the actual centroid values for the visual.
    * Normalized distance: I apply the same logic that I applied to the Normalized Points column to the Mean Squared Distance column with the formula =(B2-$B$5)/($B$2-$B$5). This allows me to plot mean squared distance on the same visual.
    * Straight Y: The goal of this column is to create values that draw a straight line from my first plotted centroid to my last plotted centroid. I do this with the formula =(C2*-1)+1. This creates the y coordinate for each normalized centroid number by subtracting the normalized centroid number from 1.
    * I plot this table using the following chart:
@@ -326,13 +333,13 @@ FROM
 * I want to show my stakeholders the average spend per person, average spend per order, average number of orders per person, and the average days since last purchase for the customers in each group. 
 
 ##### Avg. Spend Per Person
-* I create an average spend per person measure for each group. These measures create a total spend variable (the total spend when the data is filtered to the specified group), at total person count variable (the count of users when the data is filtered to the specified group), and then divide the total spend variable by the total person count variable:
+* I create an average spend per person measure for each group. These measures create a total spend variable (the total spend when the data is filtered to the specified group), a total person count variable (the count of users when the data is filtered to the specified group), and then divide the total spend variable by the total person count variable:
    * ![Average_spend_per_person_measure](Assets/Average_spend_per_person_measure.png)
 * I start the switch method by creating and average spend per person category table:
    * ![Average_spend_per_person_switch_table](Assets/average_spend_per_person_switch_table.png)
 * I apply an average spend per person swith measure to the table:
    * ![Average_spend_per_person_switch_measure](Assets/average_spend_per_person_switch_measure.png)
-* I drag the average spend per person switch measure to the y axis and the table category to the x axis. After formatting, the chart below shows that centroid group 3 spends the most money per person:
+* I drag the average spend per person switch measure to the y-axis and the table category to the x-axis. After formatting, the chart below shows that centroid group 3 spends the most money per person:
    * ![Average_spend_per_person_chart](Assets/average_spend_per_person_chart.png)
 
 ##### Avg. Order Spend
@@ -346,7 +353,7 @@ FROM
    * ![Average_order_spend_chart](Assets/average_order_spend_chart.png)
 
 ##### Avg. Number of Orders Per Person
-* I create and average number of orders per person measure for each group. This counts the number of orders for the group specified as a total order count variable, counts the number of customers in that group as a customer count variable and then divides the order count variable by the customer count variable:
+* I create an average number of orders per person measure for each group. This counts the number of orders for the group specified as a total order count variable, counts the number of customers in that group as a customer count variable and then divides the order count variable by the customer count variable:
    * ![Average_order_count_measure](Assets/average_order_count_measure.png)
 * I create an average order count table for the switch method:
    *  ![Average_order_count_table](Assets/average_order_count_switch_table.png)
@@ -356,13 +363,13 @@ FROM
    * ![Average_order_count_chart](Assets/average_order_count_chart.png)
 
 ##### Avg. Days Since Last Purchase
-* I create the a measure that shows average days from last purchase for each group. This measure calculates total days from the days since last purchase column of the data for each group and stores it in a variable, counts the customers per group and stores it in a variable, and then divides the total days variable by the customer count variable:
+* I create a measure that shows average days from last purchase for each group. This measure calculates total days from the days since last purchase column of the data for each group and stores it in a variable, counts the customers per group and stores it in a variable, and then divides the total days variable by the customer count variable:
    * ![days_since_last_purchase_measure](Assets/days_since_last_purchase_measure.png)
 * I create the average days table for the switch method:
    * ![days_since_last_purchase_table](Assets/days_switch_table.png)
-* I created a days since last purchase switch measure:
+* I create a days since last purchase switch measure:
    * ![days_switch_measure](Assets/days_switch_measure.png)
-* I applied the switch measure to a bar graph and formatted the following visual. This shows that group 3 customers make purchases most frequently:
+* I apply the switch measure to a bar graph and format the following visual. This shows that group 3 customers make purchases most frequently:
    * ![days_chart](Assets/days_chart.png)
 
 ##### Purchase Behavior Final Report Page
@@ -371,20 +378,20 @@ FROM
 
 ##### Revenue Potential
 * I want to summarize the insights found from analyzing the customer purchase behaviors using a visual for my stakeholders. The visual will be a bar chart with one bar per centroid group. The size of these bars will be controlled by a toggle that adds a specified number of customers to all of the groups. The bars will show how much revenue is added when each of the groups grow by the amount of people specified in the toggle.
-   * To create this visual, I started by creating the customers added toggle. I did this using the new parameter funtion in Power BI:
+   * To create this visual, I start by creating the customers added toggle. I do this using the new parameter funtion in Power BI:
       * ![customer_adder_toggle](Assets/customer_adder_toggle.png)
-   * Then, I created a revenue portential measure for each group by executing the steps below.
-      * create a person count variable which is the count of customers when the data is filtered the specified centroid id.
-      * create a current rev variable which is sum of total spend when the data is filtered to the specified centroid id.
-      * create and average spend variable: divide the current rev variable by the person count variable.
-      * create an additional rev variable: multiply the average spend variable by the amount specified in the toggle.
-      * return the additional rev variable value.
+   * Then, I create a revenue portential measure for each group by executing the steps below.
+      * Create a person count variable which is the count of customers when the data is filtered the specified centroid id.
+      * Create a current rev variable which is sum of total spend when the data is filtered to the specified centroid id.
+      * Create an average spend variable: divide the current rev variable by the person count variable.
+      * Create an additional rev variable: multiply the average spend variable by the amount specified in the toggle.
+      * Return the additional rev variable value.
       * ![rev_potential_meausre](Assets/rev_potential_measure.png)
-   * After executing these steps for all three centroid groups, I created a revenue potential table for the switch method:
+   * After executing these steps for all three centroid groups, I create a revenue potential table for the switch method:
       * ![rev_potential_switch_table](Assets/rev_potential_switch_table.png)
-   * Finally, I applied the following switch measure to the table:
+   * Finally, I apply the following switch measure to the table:
       * ![rev_potential_switch_meausre](Assets/rev_potential_switch_measure.png)
-   * I applied this measure to a bar graph and formatted the visual as shown in the video below. This highlights that the company will grow their revenue more quickly if they increase the size of group three than they will if they increase the size of the other groups. 
+   * I apply this measure to a bar graph and format the visual as shown in the video below. This highlights that the company will grow their revenue more quickly if they increase the size of group three than they will if they increase the size of the other groups. 
       * [![Watch the video](https://img.youtube.com)](https://youtu.be/Po5_Bo22NQU)
 
 #### Marketing
@@ -396,7 +403,7 @@ FROM
 
 ##### Gender
 * I will show the gender distribution for centroid group 3:
-   *  I start by creating the following measure for males and females in the specified group. THis measure creates a total id variable that count the customers when then centroid id column is filtered to the selected value in the slicer, creates a gender count variable that counts the customers when the centroid id is equal to the value in the slicer and gender column is filtered to the applicable gender, and divides the gender count variable by the total id variable:
+   *  I start by creating the following measure for males and females in the specified group. This measure creates a total id variable that counts the customers when the centroid id column is filtered to the selected value in the slicer, creates a gender count variable that counts the customers when the centroid id is equal to the value in the slicer and gender column is filtered to the applicable gender, and divides the gender count variable by the total id variable:
       *  ![gender_measure](Assets/gender_measure.png)
    *  I create a pie chart visual and drag the female and male measures in to the value field:
       *  ![gender_visual_build](Assets/gender_visual_build.png)
@@ -405,7 +412,7 @@ FROM
 
 ##### Age
 * I will create a bar chart that shows the age distribution for each group:
-   * The customers within this data set are ages 12-70. I will split them in to 10 year ranges. I create measures for each age range. These measures create a variable that counts the number of customers when the data is filtered to the cetroid id specified in the slicer and the age falls within the applicable range, a variable that counts the total customers when the data is filtered to the group chosen in the slicer, and divides the age range count variable by the total count variable. This what percentage of customers from the chosen group fall within each age range:
+   * The customers within this dataset are ages 12-70. I will split them in to 10 year ranges. I create measures for each age range. These measures create a variable that counts the number of customers when the data is filtered to the cetroid id specified in the slicer and the age falls within the applicable range, a variable that counts the total customers when the data is filtered to the group chosen in the slicer, and divides the age range count variable by the total count variable. This shows what percentage of customers from the chosen group fall within each age range:
       * ![age_measure](Assets/age_measure.png)
    * Then, I create an age category table for the switch method:
       * ![age_table](Assets/age_table.png)
@@ -415,30 +422,30 @@ FROM
       * ![age_chart](Assets/age_chart.png)
 
 ##### Purchase Categories
-* I will create a bar chart that shows what percentage of purchases fell in to each category per group:
-   * The data set includes 27 product categories. I reduce this to 10 sub categories for simplification as shown below:
+* I will create a bar chart that shows what percentage of purchases fall in to each category per group:
+   * The dataset includes 27 product categories. I reduce this to 10 sub categories for simplification as shown below:
       * ![sub_category_table](Assets/sub_category_table.png)
-   * I create 10 measures like the one below for bottoms. This measure creates a variable called categorycount which filters the data to the chosen centroid group in the slicer and then sums the purchase categories where each of the applicable sub categories are listed. Then, it creates a total item variable which sums all of the items purchased when the data is filtered to the centroid id selected in the slicer. Last, the measure divides the category count variable by the total item count variable. This shows the percentage of items that the selected group purchased which fell within the applicable category:
+   * I create 10 measures like the one below for bottoms. This measure creates a variable called categorycount which filters the data to the chosen centroid group in the slicer and then sums the purchase categories where each of the applicable sub categories are listed. Then, it creates a total item variable which sums all of the items purchased when the data is filtered to the centroid id selected in the slicer. Last, the measure divides the category count variable by the total item count variable. This shows the percentage of items that the selected group purchased that fell within the applicable category:
       * ![bottoms_measure](Assets/bottoms_measure.png)
-   * Manually repeating the measure creation process above for 10 category measure was too tedious. Therefore, I created an excel table and used concatenate to create the measures. As shown below, I put the sub categories incolumns A-F, the new category name in column G, and each measure component in columns I-K. The measure components were similar across all of the measures so these could be easily autofilled to the cells below. The only difference between the measures was the sub category names. Once the table was filled with this data, I applied this concatenate formula: =CONCAT(H5,G5,I5,F5,J5,E5,J5,D5,K5) to the bottoms category row and autofilled the other cells in the concat column. The snip below shows the table contents for the bottoms and dresses_suits categories:
+   * Manually repeating the measure creation process above for 10 category measure was too tedious. Therefore, I created an excel table and used concatenate to create the measures. As shown below, I put the sub categories in columns A-F, the new category name in column G, and each measure component in columns I-K. The measure components were similar across all of the measures so these could be easily autofilled to the cells below. The only difference between the measures was the sub category names. Once the table was filled with this data, I applied this concatenate formula: =CONCAT(H5,G5,I5,F5,J5,E5,J5,D5,K5) to the bottoms category row and autofilled the other cells in the concat column. The snip below shows the table contents for the bottoms and dresses_suits categories:
       * ![categories_measure_concat_table](Assets/categories_measure_concat_table.png)
    * Once the measures were created, I prepared for the switch method by creating a switch table for the categories:
       * ![category_switch_table](Assets/category_switch_table.png)
    * I applied the following switch measure to the table:
       * ![category_switch_measure](Assets/category_switch_measure.png)
-   * I applied the switch measure to a bar chart and formatted the visual. This resulted in the visual below. This shows that centroid group 3 (shown in the centroid slicer on the report page) purchases most items from the bottoms category. They also make a significant portion of purchases from the topa and outerwear categories:
+   * I applied the switch measure to a bar chart and formatted the visual. This resulted in the visual below. This shows that centroid group 3 (shown in the centroid slicer on the report page) purchases most items from the bottoms category. They also make a significant portion of purchases from the tops and outerwear categories:
       * ![category_chart](Assets/category_chart.png)
 
 ##### Countries
-* I will create a bar chat that shows what percentage of customers from each group are from a given country. I will follow use the same measure creation method that I used for the purchase categories to create the measures for the countries. The country measures will be easier since they do not involve sub categories. I will start by filling an excel table with the country names and measure parts. I will apply the concatenate formula to create the measures for each country as shown below:
+* I will create a bar chart that shows what percentage of customers from each group are from a given country. I will use the same measure creation method that I used for the purchase categories to create the measures for the countries. The country measures will be easier since they do not involve sub categories. I will start by filling an excel table with the country names and measure parts. I will apply the concatenate formula to create the measures for each country as shown below:
    * ![country_concat_table](Assets/country_concat_table.png)
 * I create the measures in Power BI for each country like the one shown below for China:
    * ![country_measure](Assets/country_measure.png)
-* I created a country table for the switch method:
+* I create a country table for the switch method:
    * ![country_table](Assets/country_table.png)
-* I appllied the following switch measure to this table:
+* I applly the following switch measure to this table:
    * ![country_switch_measure](Assets/country_switch_measure.png)
-* I applied the switch measure to a bar chart and formatted the visual. This resulted in the chart below. It shows that centroid group 3 (shown in the centroid slicer on the report page) is made up of mostly people who are from China or the U.S.
+* I apply the switch measure to a bar chart and format the visual. This results in the chart below. It shows that centroid group 3 (shown in the centroid slicer on the report page) is made up of mostly people who are from China or the U.S.
    * ![country_chart](Assets/country_chart.png)
 
 ##### Marketing Report Page
