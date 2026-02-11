@@ -487,42 +487,42 @@ I analyze the data of Fitbit users to derive marketing insights for my stakehold
     * This dataset is updated annually.
 ### Phase Three and Four: Process and Analyze
 #### Are users wearing the watch as a fashionable accessory? Do they wear it all day?
-    * For this task, I use the heartrate_seconds_merged.csv tables. There is one for the first date range (3/12-4/11), and one for the second date range (4/12-5/12). A preview of this table is shown below. A user must be wearing the watch for their heartrate to be tracked. Therefore, this table will show us how long each user wears their watch:
-    * ![Heartrate Table Example](Assets/heart_rate_table.jpg)
-    * First, I clean this data by formatting the id’s to a number and expanding the date row to include all information.
-    * Second, I upload the tables to BigQuery.
-    * Third, I apply the following steps to the datasets for both date ranges:
-         * I find the number of days that each user was wearing their fitbit during the date range.
-            * To do this, I apply the following SQL query to the heartrate table:
-            * ![Day Count Query](Assets/day_count_query.jpg)
-            * Below is the table created by this query:
-            * ![Day Count Table Example](Assets/Day_Count_Table_Example.png)
-                 * I then run the following query on the table above to find the total number of days per user during the range:
-                 * ![Day Count Final Sum Query](Assets/Day_Count_Final_Sum_Query.png)
-                 * Below is the table that results from running this query:
-                 * ![Days by User Table Example](Assets/Days_By_User_Table_Example.png)
-         * Now that I know the total number of days per user for this date range, I need to find the number of hours that each user wore the watch during the date range.
-            *  To do this, I run the following query on the original heart rate table:
-            *  ![Hour Count Query1](Assets/Hour_Count_Query1.png)
-            *  This results in the following table with the start and end time on each day for each user:
-            *  ![Hour Count Table1](Assets/Hour_Count_Table1.png)
-            *  Then, I run the following query on the table above to add the total duration per user:
-            *  ![Hour Count Query2](Assets/Hour_Count_Query2.png)
-            *  This results in the following table:
-            *  ![Hour Count Table2](Assets/Hour_Count_table2.png)
-            *  I join this table with the day count table using the following query:
-            *  ![Hour Count Query3](Assets/Hour_Count_Query3.png)
-            *  This results in a table that shows the Fitbit Id, total days the fitbit was used, and the total hours the fitbit was used. Below is a snip of the table for the 3/12-4/11 dataset:
-            *  ![Hour Count Table3](Assets/Hour_Count_Table3.png)
-         * Since I applied these steps to both date ranges, I ended up with 2 tables.
-            * I combine these tables in Excel.  
-            * In a new tab, I use a sumif function to total the number of hours per user in one column and the number of days per user in another.
-               * I add a third column that divides the hours used by the days used to find each user's average daily use.
-            * In a new sheet, I create a table that uses a countif function to add the number of users that fell within each usage range as shown below:
-            *  ![Final Usage Range Table](Assets/Final_Usage_Range_Table.png)
-            * I use Excel to create a chart from this table as shown below:
-            * ![Final Usage Range Chart](Assets/Final_Usage_Range_Chart.png)
-   * This chart shows us that most Fitbit users wear their watch between 12 and 24 hours per day. My recommendation to my stakeholders is to market their product to users who are looking for a fashionable watch that they can wear all day, not just while working out.
+ * For this task, I use the heartrate_seconds_merged.csv tables. There is one for the first date range (3/12-4/11), and one for the second date range (4/12-5/12). A preview of this table is shown below. A user must be wearing the watch for their heartrate to be tracked. Therefore, this table will show us how long each user wears their watch:
+ * ![Heartrate Table Example](Assets/heart_rate_table.jpg)
+ * First, I clean this data by formatting the id’s to a number and expanding the date row to include all information.
+ * Second, I upload the tables to BigQuery.
+ * Third, I apply the following steps to the datasets for both date ranges:
+      * I find the number of days that each user was wearing their fitbit during the date range.
+         * To do this, I apply the following SQL query to the heartrate table:
+         * ![Day Count Query](Assets/day_count_query.jpg)
+         * Below is the table created by this query:
+         * ![Day Count Table Example](Assets/Day_Count_Table_Example.png)
+              * I then run the following query on the table above to find the total number of days per user during the range:
+              * ![Day Count Final Sum Query](Assets/Day_Count_Final_Sum_Query.png)
+              * Below is the table that results from running this query:
+              * ![Days by User Table Example](Assets/Days_By_User_Table_Example.png)
+      * Now that I know the total number of days per user for this date range, I need to find the number of hours that each user wore the watch during the date range.
+         *  To do this, I run the following query on the original heart rate table:
+         *  ![Hour Count Query1](Assets/Hour_Count_Query1.png)
+         *  This results in the following table with the start and end time on each day for each user:
+         *  ![Hour Count Table1](Assets/Hour_Count_Table1.png)
+         *  Then, I run the following query on the table above to add the total duration per user:
+         *  ![Hour Count Query2](Assets/Hour_Count_Query2.png)
+         *  This results in the following table:
+         *  ![Hour Count Table2](Assets/Hour_Count_table2.png)
+         *  I join this table with the day count table using the following query:
+         *  ![Hour Count Query3](Assets/Hour_Count_Query3.png)
+         *  This results in a table that shows the Fitbit Id, total days the fitbit was used, and the total hours the fitbit was used. Below is a snip of the table for the 3/12-4/11 dataset:
+         *  ![Hour Count Table3](Assets/Hour_Count_Table3.png)
+      * Since I applied these steps to both date ranges, I ended up with 2 tables.
+         * I combine these tables in Excel.  
+         * In a new tab, I use a sumif function to total the number of hours per user in one column and the number of days per user in another.
+            * I add a third column that divides the hours used by the days used to find each user's average daily use.
+         * In a new sheet, I create a table that uses a countif function to add the number of users that fell within each usage range as shown below:
+         *  ![Final Usage Range Table](Assets/Final_Usage_Range_Table.png)
+         * I use Excel to create a chart from this table as shown below:
+         * ![Final Usage Range Chart](Assets/Final_Usage_Range_Chart.png)
+* This chart shows us that most Fitbit users wear their watch between 12 and 24 hours per day. My recommendation to my stakeholders is to market their product to users who are looking for a fashionable watch that they can wear all day, not just while working out.
 #### What time of day do users exercise?
    * To answer this question, I use the hourly calories tables for both date ranges.
       * I start by opening these tables in Excel. Then, I extract the hour from the date-hour column using flash fill.
