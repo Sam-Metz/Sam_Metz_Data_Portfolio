@@ -600,10 +600,10 @@ A task's priority is determined by it's importance category (where does the task
    * The priority column adds all of the points columns using formula: =SUM(H2:J2) as shown below:
    * ![Priority Formula](Assets/Priority_Formula.png)
 ##### Sorting:
-         * Autofill all formulas to the cells below them
-         * Sort the entire table by the priority column lowest to highest
-         * The tasks that are sorted to the top of the list are the tasks that need to get done first
-         * Edit the point values and categories to match your preferences.           
+   * Autofill all formulas to the cells below them
+   * Sort the entire table by the priority column lowest to highest
+   * The tasks that are sorted to the top of the list are the tasks that need to get done first
+   * Edit the point values and categories to match your preferences.           
 
 [Home](#sam-metz-data-portfolio)
 
