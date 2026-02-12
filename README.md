@@ -471,9 +471,9 @@ I analyze the data of Fitbit users to derive marketing insights for my stakehold
     * How could these trends apply to Bellabeat's customers?
     * How could these trends influence Bellabeat's marketing strategy?
 ### Phase One: Ask
-* Are users wearing the watch as a fashionable accessory? Do they wear it all day?
-* What time of day do users typically exercise?
-* How far do users go per day?
+* My stakeholders ask 2 business questions:
+   * What time of day do users typically exercise?
+   * How far do users go per day?
 
 ### Phase Two: Prepare
 * Is the data reliable?
@@ -486,65 +486,73 @@ I analyze the data of Fitbit users to derive marketing insights for my stakehold
 * Is the data current?
     * This dataset is updated annually.
 ### Phase Three and Four: Process and Analyze
-#### Are users wearing the watch as a fashionable accessory? Do they wear it all day?
- * For this task, I use the heartrate_seconds_merged.csv tables. There is one for the first date range (3/12-4/11), and one for the second date range (4/12-5/12). A preview of this table is shown below. A user must be wearing the watch for their heartrate to be tracked. Therefore, this table will show us how long each user wears their watch:
- * ![Heartrate Table Example](Assets/heart_rate_table.jpg)
- * First, I clean this data by formatting the id’s to a number and expanding the date row to include all information.
- * Second, I upload the tables to BigQuery.
- * Third, I apply the following steps to the datasets for both date ranges:
-      * I find the number of days that each user was wearing their fitbit during the date range.
-         * To do this, I apply the following SQL query to the heartrate table:
-         * ![Day Count Query](Assets/day_count_query.jpg)
-         * Below is the table created by this query:
-         * ![Day Count Table Example](Assets/Day_Count_Table_Example.png)
-              * I then run the following query on the table above to find the total number of days per user during the range:
-              * ![Day Count Final Sum Query](Assets/Day_Count_Final_Sum_Query.png)
-              * Below is the table that results from running this query:
-              * ![Days by User Table Example](Assets/Days_By_User_Table_Example.png)
-      * Now that I know the total number of days per user for this date range, I need to find the number of hours that each user wore the watch during the date range.
-         *  To do this, I run the following query on the original heart rate table:
-         *  ![Hour Count Query1](Assets/Hour_Count_Query1.png)
-         *  This results in the following table with the start and end time on each day for each user:
-         *  ![Hour Count Table1](Assets/Hour_Count_Table1.png)
-         *  Then, I run the following query on the table above to add the total duration per user:
-         *  ![Hour Count Query2](Assets/Hour_Count_Query2.png)
-         *  This results in the following table:
-         *  ![Hour Count Table2](Assets/Hour_Count_table2.png)
-         *  I join this table with the day count table using the following query:
-         *  ![Hour Count Query3](Assets/Hour_Count_Query3.png)
-         *  This results in a table that shows the Fitbit Id, total days the fitbit was used, and the total hours the fitbit was used. Below is a snip of the table for the 3/12-4/11 dataset:
-         *  ![Hour Count Table3](Assets/Hour_Count_Table3.png)
-      * Since I applied these steps to both date ranges, I ended up with 2 tables.
-         * I combine these tables in Excel.  
-         * In a new tab, I use a sumif function to total the number of hours per user in one column and the number of days per user in another.
-            * I add a third column that divides the hours used by the days used to find each user's average daily use.
-         * In a new sheet, I create a table that uses a countif function to add the number of users that fell within each usage range as shown below:
-         *  ![Final Usage Range Table](Assets/Final_Usage_Range_Table.png)
-         * I use Excel to create a chart from this table as shown below:
-         * ![Final Usage Range Chart](Assets/Final_Usage_Range_Chart.png)
-* This chart shows us that most Fitbit users wear their watch between 12 and 24 hours per day. My recommendation to my stakeholders is to market their product to users who are looking for a fashionable watch that they can wear all day, not just while working out.
+
 #### What time of day do users exercise?
    * To answer this question, I use the hourly calories tables for both date ranges.
-      * I start by opening these tables in Excel. Then, I extract the hour from the date-hour column using flash fill.
+      * I start by opening these tables in Excel. Then, I extract the hour from the date-hour column using flash fill. Below is the table:
+         * ![Hourly Calories table](Assets/hourly_calories_table.png)
       * Then, I download the tables in to BigQuery and run the following query on them:
-      * ![Hourly Calories Query](Assets/Hourly_Calories_Query_image.png)
-      * The query above combines the datasets from both date ranges, averages the calories for each hour, and groups the results by hour. I open this table in Excel and creat the following graph:
+        ```sql
+        SELECT
+  Hour,
+  AVG(Calories) AS Average_Per_Hour
+FROM(
+    SELECT
+      *
+    FROM
+      linear-facet-257019.Fitbit2.Hourly_Calories_312_411
+    UNION ALL 
+    SELECT
+      *
+    FROM
+      linear-facet-257019.Fitbit2.Hourly_Calories_412_512
+)
+  
+GROUP BY
+  Hour
+  ```
+      * The query above combines the datasets from both date ranges, averages the calories for each hour, and groups the results by hour. I open this table in Excel and create the following graph:
       * ![Hourly Calories Graph](Assets/Hourly_Calories_Graph.png)
    * Our population burns the most calories at 7PM each day. Based on this information, I recommend that my stakeholders market to working professionals. Our advertisements could be timed to get the most visibility by showing them in gyms at 7PM or, right after, when these users are coming home from the gym. This information could also inform decisions about the watch design. It might make sense to create a watch that can be worn while at work so that users do not need to remember to put it on before leaving for their workout.
 #### How far do users go per day?
-   * To answer this question, I use the daily activity datasets. These tables show the distance that each user went each day. There is one table for the date range 3/12-4/11 and one for 4/12-5/12. I want to make sure there aren't duplicate dates for any one user. To do this, I apply the following query to each of the tables:
-   * ![Distance_Duplicate_Query](Assets/Distance_Duplicate_Query.png)
-   * This confirms that there aren't duplicate dates for any user. If there were duplicate dates per user, I would have to sum the distances for each date. 
+   * To answer this question, I use the daily activity datasets. These tables show the distance that each user went each day as shown below.
+      * ![daily_activity_table](Assets/daily_activity_table.png)
+   * I confirm using Excel filters that there aren't duplicate dates for any user. If there were duplicate dates per user. There aren't any. 
    * Then, I run the following query to combine the datasets from both ranges, find the average distance per user, and then count the number of users that fall within each distance range:
-   * ![Distance Range Query](Assets/Distance_Range_Query.png)
+```sql
+SELECT
+  COUNT(CASE WHEN Average_Distance_Per_User >=0 AND Average_Distance_Per_User <=3 THEN 1 END) AS Range_1,
+  COUNT(CASE WHEN Average_Distance_Per_User >=3 AND Average_Distance_Per_User <=6 THEN 1 END) AS Range_2,
+  COUNT(CASE WHEN Average_Distance_Per_User >=6 AND Average_Distance_Per_User <=9 THEN 1 END) AS Range_3,
+  COUNT(CASE WHEN Average_Distance_Per_User >=9 AND Average_Distance_Per_User <=12 THEN 1 END) AS Range_4,
+  COUNT(CASE WHEN Average_Distance_Per_User >=12 AND Average_Distance_Per_User <=15 THEN 1 END) AS Range_5,
+  COUNT(CASE WHEN Average_Distance_Per_User >=15 AND Average_Distance_Per_User <=18 THEN 1 END) AS Range_6,
+  COUNT(CASE WHEN Average_Distance_Per_User >=18 AND Average_Distance_Per_User <=21 THEN 1 END) AS Range_7,
+  COUNT(CASE WHEN Average_Distance_Per_User >=21 AND Average_Distance_Per_User <=24 THEN 1 END) AS Range_8,
+  COUNT(CASE WHEN Average_Distance_Per_User >=24 AND Average_Distance_Per_User <=27 THEN 1 END) AS Range_9,
+  COUNT(CASE WHEN Average_Distance_Per_User >=27 AND Average_Distance_Per_User <=30 THEN 1 END) AS Range_10
+FROM
+  (SELECT
+    Id,
+    AVG(TotalDistance) AS Average_Distance_Per_User
+  FROM
+    (SELECT
+      *
+    FROM
+      linear-facet-257019.Fitbit2.Daily_Activity_312_411_Phase2
+    UNION ALL
+    SELECT
+    *
+    FROM
+      linear-facet-257019.Fitbit2.Daily_Activity_412_512_Phase2)
+  GROUP BY
+    Id)
+```
    * I download the table that this query creates in Excel and make the folowing graph to show how many users fall within each kilometer range for an average day:
    * ![Distance Range Graph](Assets/Distance_Per_Day_Chart.png)
 * Most users fall between 0-9 Km per day. The majority of users travel 3-6 Km per day. The daily activity table also has a column that shows sedentary distance. This column typicaly shows a 0 or a very small number. This means that most of the distance being tracked is active distance. Therefore, we can assume that the users are traveling these distances for their workouts or, at the very least, walking. We should use this information to market to runners or walkers that usually travel this distance. We should also design a watch that is user friendly for runners and walkers and has an effective mileage tracker.
 
 ### Phase 5 and 6: Share and Act
-* Are users wearing the watch as a fashionable accessory? Do they wear it all day?
-   * ![Final Usage Range Chart](Assets/Final_Usage_Range_Chart.png)
-   * Yes, most users wear their watch all day. We should market our product to users who are looking for a fashionable watch. We should also make sure our watch is fashionable enough to be worn all day.
 * What time of day do users typically exercise?
    * ![Hourly Calories Graph](Assets/Hourly_Calories_Graph.png)
    * Users burn the most calories at 7PM each day. We should market to working professionals with this time frame in mind. We should also create a watch that fits a professional dress code to accommodate these users.
