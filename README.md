@@ -517,8 +517,8 @@ The query above combines the datasets from both date ranges, averages the calori
 #### How far do users go per day?
    * To answer this question, I use the daily activity datasets. These tables show the distance that each user went each day as shown below.
       * ![daily_activity_table](Assets/daily_activity_table.png)
-   * I confirm using Excel filters that there aren't duplicate dates for any user. If there were duplicate dates per user. There aren't any. 
-   * Then, I run the following query to combine the datasets from both ranges, find the average distance per user, and then count the number of users that fall within each distance range:
+   * I confirm using Excel filters that there aren't duplicate dates for any user. There aren't any. 
+   * Then, I run the following query to combine the datasets from both date ranges, find the average distance per user, and then count the number of users that fall within each distance range:
 ```sql
 SELECT
   COUNT(CASE WHEN Average_Distance_Per_User >=0 AND Average_Distance_Per_User <=3 THEN 1 END) AS Range_1,
