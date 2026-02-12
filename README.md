@@ -511,8 +511,8 @@ FROM(
 GROUP BY
   Hour
 ```
-      * The query above combines the datasets from both date ranges, averages the calories for each hour, and groups the results by hour. I open this table in Excel and create the following graph:
-      * ![Hourly Calories Graph](Assets/Hourly_Calories_Graph.png)
+The query above combines the datasets from both date ranges, averages the calories for each hour, and groups the results by hour. I open this table in Excel and create the following graph:   
+   * ![Hourly Calories Graph](Assets/Hourly_Calories_Graph.png)
    * Our population burns the most calories at 7PM each day. Based on this information, I recommend that my stakeholders market to working professionals. Our advertisements could be timed to get the most visibility by showing them in gyms at 7PM or, right after, when these users are coming home from the gym. This information could also inform decisions about the watch design. It might make sense to create a watch that can be worn while at work so that users do not need to remember to put it on before leaving for their workout.
 #### How far do users go per day?
    * To answer this question, I use the daily activity datasets. These tables show the distance that each user went each day as shown below.
