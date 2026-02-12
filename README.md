@@ -461,15 +461,12 @@ FROM
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## Coursera Case Study
-I analyze the data of Fitbit users to derive marketing insights for my stakeholders. This is a case study for my Google Data Analytics Certificate. To complete this task, I used the 6 step data analyses process outlined in the course: ask, prepare, process, analyze, share, and act. 
+I analyze the data of Fitbit users to derive marketing insights for my stakeholders. This is a case study for my Google Data Analytics Certificate. To complete this task, I use the 6 step data analyses process outlined in the course: ask, prepare, process, analyze, share, and act. 
 ### Prompt
 * You are a data analyst for a company called Bellabeat. Bellabeat makes wearable fitness devices.
 * Your team has been asked to anazlyze trends in smart fitness device usage in an effort to help Bellabeat reach their target market more effectively.
 * A dataset about Fitbit users is provided by the company.
-* Questions:
-    * What are some trends in smart device usage?
-    * How could these trends apply to Bellabeat's customers?
-    * How could these trends influence Bellabeat's marketing strategy?
+
 ### Phase One: Ask
 * My stakeholders ask 2 business questions:
    * What time of day do users typically exercise?
@@ -575,14 +572,15 @@ A task's priority is determined by it's importance category (where does the task
 ### Priority Sort Design
 * Set up 2 tabs. Tab one is the actual to do list calculator that will sort tasks. Tab 2 is the points tab.
    * The points tab contains 3 separate tables: Importance table, effort table, and urgency table.
-      * Importance: what category does this task fall in to? rank these categories from most to least important 
+#### Importance: what category does this task fall in to? rank these categories from most to least important 
          * Assign each category an importance letter and a point value. Lower points result in higher priority rank
-      * Effort: how complex is the task? how much time will it take?
+#### Effort: how complex is the task? how much time will it take?
          * Rank these complexity categories from least to most effort and assign a point value to each complexity category. The less complex the lower the points and higher priority.
-      * Due Date: set urgency preferences: As a due date approaches, the point value decreases and the task becomes higher priority. My preference is that due date has the most impact on priority.
+#### Due Date: set urgency preferences: 
+         * As a due date approaches, the point value decreases and the task becomes higher priority. My preference is that due date has the most impact on priority.
          * ![Priority Sort](Assets/Personal_Priorit_Sort.png)
-   * The Sort Calculator tab setup:
-      * Urgency Point Column setup:
+#### Table Setup:
+##### Urgency Point Column setup:
          * The due date is entered manually for each task.
             * Once the due date is entered, They Day left column calculates the number of days left using the formula: =F2 - TODAY(). This finds the difference between the current date and the due date. The day left column is formatted as a whole number.
             * ![Day Left](Assets/Day_Left_Formula.png)
@@ -590,18 +588,18 @@ A task's priority is determined by it's importance category (where does the task
                * ![Urgency Formual](Assets/Urgency_Formula.png)
                   * The urgency point column looks up a point value by referencing the value in the urgency column and returning the corresponding point value from the urgency table in the points tab using formula: =VLOOKUP(E2,Points!I:J,2,FALSE) as shown below:
                      * ![Urgency Point](Assets/Urgency_Point_Formula.png)
-      * Effort Point Column Setup:
+##### Effort Point Column Setup:
          * The effort is entered manually for each task.
-            * The effort point column looks up the effort point value by referencing the value entered in the effort column in the effort table of the points tab using formula: =VLOOKUP(D2,Points!E:F,2,FALSE) as shown below:
+            * The effort point column looks up the effort point value by referencing the value entered in the effort column of the effort table using formula: =VLOOKUP(D2,Points!E:F,2,FALSE) as shown below:
             * ![Effort Poing](Assets/Effort_Point_Formula.png)
-      * Importance Point Column Setup:
+##### Importance Point Column Setup:
          * The Importance category is entered manually for each task
-            * The importance point column looks up the importance point value by referencing the value entered in the importance column in the importance table of the points tab using formula: =VLOOKUP(C2,Points!A:B,2,FALSE) as show below:
+            * The importance point column looks up the importance point value by referencing the value entered in the importance column of the importance table using formula: =VLOOKUP(C2,Points!A:B,2,FALSE) as show below:
             * ![Importance Point](Assets/Importance_Point_Formula.png)
-      * Priority Column Setup:
+##### Priority Column Setup:
          * The priority column adds all of the points columns using formula: =SUM(H2:J2) as shown below:
          * ![Priority Formula](Assets/Priority_Formula.png)
-      * Sorting:
+##### Sorting:
          * Autofill all formulas to the cells below them
          * Sort the entire table by the priority column lowest to highest
          * The tasks that are sorted to the top of the list are the tasks that need to get done first
