@@ -573,32 +573,32 @@ A task's priority is determined by it's importance category (where does the task
 * Set up 2 tabs. Tab one is the actual to do list calculator that will sort tasks. Tab 2 is the points tab.
    * The points tab contains 3 separate tables: Importance table, effort table, and urgency table.
 #### Importance: what category does this task fall in to? rank these categories from most to least important 
-         * Assign each category an importance letter and a point value. Lower points result in higher priority rank
+   * Assign each category an importance letter and a point value. Lower points result in higher priority rank
 #### Effort: how complex is the task? how much time will it take?
-         * Rank these complexity categories from least to most effort and assign a point value to each complexity category. The less complex the lower the points and higher priority.
+   * Rank these complexity categories from least to most effort and assign a point value to each complexity category. The less complex the lower the points and higher priority.
 #### Due Date: set urgency preferences: 
-         * As a due date approaches, the point value decreases and the task becomes higher priority. My preference is that due date has the most impact on priority.
-         * ![Priority Sort](Assets/Personal_Priorit_Sort.png)
+   * As a due date approaches, the point value decreases and the task becomes higher priority. My preference is that due date has the most impact on priority.
+* ![Priority Sort](Assets/Personal_Priorit_Sort.png)
 #### Table Setup:
 ##### Urgency Point Column setup:
-         * The due date is entered manually for each task.
-            * Once the due date is entered, They Day left column calculates the number of days left using the formula: =F2 - TODAY(). This finds the difference between the current date and the due date. The day left column is formatted as a whole number.
-            * ![Day Left](Assets/Day_Left_Formula.png)
-               * The urgency column assigns an urgency category based on the number of days left until the due date using formula: =IF(G2<=0,1, IF(G2<=3,2,IF(G2<=5,3,IF(G2<=20,4,5)))) as shown below. If the day left column contains a value less than or equal to 0 then it returns 1. If the day left column contains a value that is less than or equal to 3 then it returns 2. If the day left column contains a value that is less than or equal to 5 then it returns a 3. If the day left column contains a value that is less than or equal to 20 then it return 4. Otherwise, it returns a value of 5.
-               * ![Urgency Formual](Assets/Urgency_Formula.png)
-                  * The urgency point column looks up a point value by referencing the value in the urgency column and returning the corresponding point value from the urgency table in the points tab using formula: =VLOOKUP(E2,Points!I:J,2,FALSE) as shown below:
-                     * ![Urgency Point](Assets/Urgency_Point_Formula.png)
+   * The due date is entered manually for each task.
+      * Once the due date is entered, They Day left column calculates the number of days left using the formula: =F2 - TODAY(). This finds the difference between the current date and the due date. The day left column is formatted as a whole number.
+      * ![Day Left](Assets/Day_Left_Formula.png)
+         * The urgency column assigns an urgency category based on the number of days left until the due date using formula: =IF(G2<=0,1, IF(G2<=3,2,IF(G2<=5,3,IF(G2<=20,4,5)))) as shown below. If the day left column contains a value less than or equal to 0 then it returns 1. If the day left column contains a value that is less than or equal to 3 then it returns 2. If the day left column contains a value that is less than or equal to 5 then it returns a 3. If the day left column contains a value that is less than or equal to 20 then it return 4. Otherwise, it returns a value of 5.
+         * ![Urgency Formual](Assets/Urgency_Formula.png)
+            * The urgency point column looks up a point value by referencing the value in the urgency column and returning the corresponding point value from the urgency table in the points tab using formula: =VLOOKUP(E2,Points!I:J,2,FALSE) as shown below:
+               * ![Urgency Point](Assets/Urgency_Point_Formula.png)
 ##### Effort Point Column Setup:
-         * The effort is entered manually for each task.
-            * The effort point column looks up the effort point value by referencing the value entered in the effort column of the effort table using formula: =VLOOKUP(D2,Points!E:F,2,FALSE) as shown below:
-            * ![Effort Poing](Assets/Effort_Point_Formula.png)
+   * The effort is entered manually for each task.
+      * The effort point column looks up the effort point value by referencing the value entered in the effort column of the effort table using formula: =VLOOKUP(D2,Points!E:F,2,FALSE) as shown below:
+      * ![Effort Poing](Assets/Effort_Point_Formula.png)
 ##### Importance Point Column Setup:
-         * The Importance category is entered manually for each task
-            * The importance point column looks up the importance point value by referencing the value entered in the importance column of the importance table using formula: =VLOOKUP(C2,Points!A:B,2,FALSE) as show below:
-            * ![Importance Point](Assets/Importance_Point_Formula.png)
+   * The Importance category is entered manually for each task
+      * The importance point column looks up the importance point value by referencing the value entered in the importance column of the importance table using formula: =VLOOKUP(C2,Points!A:B,2,FALSE) as show below:
+      * ![Importance Point](Assets/Importance_Point_Formula.png)
 ##### Priority Column Setup:
-         * The priority column adds all of the points columns using formula: =SUM(H2:J2) as shown below:
-         * ![Priority Formula](Assets/Priority_Formula.png)
+   * The priority column adds all of the points columns using formula: =SUM(H2:J2) as shown below:
+   * ![Priority Formula](Assets/Priority_Formula.png)
 ##### Sorting:
          * Autofill all formulas to the cells below them
          * Sort the entire table by the priority column lowest to highest
@@ -701,7 +701,7 @@ A task's priority is determined by it's importance category (where does the task
 * Lastly, I create a scoreboard tab. I add a stacked bar chart that referenced the data from the scoreboard source tab. I use customize series to color code the bars and text for each team. As the scorecards for each even are updated, the bars on the scoreboard change in size to reflect the points for each team. During the competition, I plugged my computer in to a tv via hdmi and split my screens. I opened 2 duplicate web broswer tabs of the google sheet. On one screen, I displayed the scoreboard, on the other, I edited the scorecards accordingly. That way, everyone could see their most current score via dynamic visual:
    * ![final_scoreboard](Assets/final_scoreboard.png)
 
-
+[Home](#sam-metz-data-portfolio)
 
 
 
