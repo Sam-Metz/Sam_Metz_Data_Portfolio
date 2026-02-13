@@ -1,26 +1,26 @@
 # Sam Metz Data Portfolio
 Thank you for visiting my data portoflio. 
-* Projects (click the link to view the project. click "home" at the end of any section to return here)
-    * [K-means Customer Analyses](#k-means-customer-analyses) : SQL Big Query, Excel and Power BI
+* Projects (click the link to view the project. click "Home" at the end of any section to return here)
+    * [K-means Customer Analysis](#k-means-customer-analysis) : SQL Big Query, Excel and Power BI
     * [Coursera Case Study](#coursera-case-study) : SQL Big Query, Excel, Tableau
     * [Priority Sort Calculator](#priority-sort) : Google Sheets
     * [Family Olympics Scoreboard](#family-olympics-scoreboard) : Google Sheets
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-## K-means Customer Analyses
+## K-means Customer Analysis
 * I use a K-means to analyze a sample dataset provided by Big Query. 
 
 ### The Dataset
 * I am working with the_look_ecommerce dataset in Big Query. It consists of 8 tables with sample data for an online retailer. The tables include distribution_centers, events, inventory_items, order_items, products, thelook_ecommerce-table, and users. 
 
 ### Mission
-* My ultimate goal is to use K-means to divide the customers in this dataset in to groups based on their characteristics and purchase behaviors. This will allow my stakeholders to better understand their customers and derive an effective marketing plan to increase revenue for the company. 
+* My ultimate goal is to use K-means to divide the customers in this dataset into groups based on their characteristics and purchase behaviors. This will allow my stakeholders to better understand their customers and derive an effective marketing plan to increase revenue for the company. 
 
 ### Plan
-* In order to complete this mission, I will need to combine these tables in to one table that has one row per user and columns for each characteristic that I want the model to consider. I will use the elbow method to determine the optimal number of centroids. After deciding on the number of centroids, I will run the model with that number and assign each customer to a centroid in my formatted table. I will upload this table to Power BI and create visuals to display the insights to my stakeholders.
+* In order to complete this mission, I will need to combine these tables into one table that has one row per user and columns for each characteristic that I want the model to consider. I will use the elbow method to determine the optimal number of centroids. After deciding on the number of centroids, I will run the model with that number and assign each customer to a centroid in my formatted table. I will upload this table to Power BI and create visuals to display the insights to my stakeholders.
 
 ### Preparation
-* The relevant tables for my analyses are order_items, users, and products. Below is a sample of each in their original format:
+* The relevant tables for my analysis are order_items, users, and products. Below is a sample of each in their original format:
 
     * order_items: Includes information about the line items included on each order
        *  ![Order Items](Assets/order_items_table.png)
@@ -207,7 +207,7 @@ This creates the following table. I have hidden all but 2 country columns and al
 * ![K means table](Assets/Formatted_K_Means_Table.png)
 
 ### Elbow Method
-For a successful K-means analyses, it is imperative that I choose the right number of centroids. As I run the model with an increasing number of centroids, the mean squarred distance from the data points to their corresponding cluster will decrease. However, as I add centroids, the insights become more complex for my stakeholders. More specifically, 10 customer groups is just way too many customer groups to keep track of while 3 or 4 is much more manageable. I use the elbow method to determine when the rate of msd (mean squared distance) decrease slows down drastically. The centroid number at which the slow down occurs will be the optimal number of centroids for the analyses. To begin, I saved the formatted table to Big Query and applied the following query to it. This runs the K-means analyses with the number of centroids specified. The query code includes my description of each step. I ran with 2, 3, 4, 5, 6, 7, 8, 9, and 10 centroids. I saved the results of each model to Big Query:
+For a successful K-means analysis, it is imperative that I choose the right number of centroids. As I run the model with an increasing number of centroids, the mean squarred distance from the data points to their corresponding cluster will decrease. However, as I add centroids, the insights become more complex for my stakeholders. More specifically, 10 customer groups is just way too many customer groups to keep track of while 3 or 4 is much more manageable. I use the elbow method to determine when the rate of msd (mean squared distance) decrease slows down drastically. The centroid number at which the slow down occurs will be the optimal number of centroids for the analysis. To begin, I saved the formatted table to Big Query and applied the following query to it. This runs the K-means analysis with the number of centroids specified. The query code includes my description of each step. I ran with 2, 3, 4, 5, 6, 7, 8, 9, and 10 centroids. I saved the results of each model to Big Query:
 
 ```sql
 CREATE OR REPLACE MODEL
@@ -216,7 +216,7 @@ CREATE OR REPLACE MODEL
 OPTIONS
   (
     MODEL_TYPE = 'KMEANS',
-  /*Big Query's function for k means analyses*/
+  /*Big Query's function for k means analysis*/
     NUM_CLUSTERS = 2, 
   /*The number of centroids to use*/
     STANDARDIZE_FEATURES = TRUE 
@@ -291,7 +291,7 @@ I created a table in excel with the columns: Centroids, Mean Squared Distance, N
    * Straight Y: The goal of this column is to create values that draw a straight line from my first plotted centroid to my last plotted centroid. I do this with the formula =(C2*-1)+1. This creates the y coordinate for each normalized centroid number by subtracting the normalized centroid number from 1.
    * I plot this table using the following chart:
       * ![Elbow_Chart](Assets/Elbow_Chart.png)
-         * The arrow shows that the distance between centroid 3 and the nearest point on the straight line is the greatest. Therefore, this is where the most drastic slow down in cluster tightening occurs. I will move forward with my analyses using 3 centroids.
+         * The arrow shows that the distance between centroid 3 and the nearest point on the straight line is the greatest. Therefore, this is where the most drastic slow down in cluster tightening occurs. I will move forward with my analysis using 3 centroids.
 
 ### Centroid Assignment
 I assigned each customer in my formatted table to their centroid using the following query:
@@ -306,17 +306,17 @@ FROM
       FROM
        `linear-facet-257019.the_look_ecommerce_k_means.formatted_table_k_means`))
 ```
-### Power BI Analyses
+### Power BI Analysis
 #### Centroid Group Size
 * I want to show my stakeholders how many customers fall within each centroid group. I started by creating 3 measures that count the number of centroids in each group. The dax code for the group 1 measure is shown below. The measures for groups 2 and 3 follow the same format, but are applied to their group.
    * ![Centroid_count_1_measure](Assets/centroid_count_1_measure.png)
-* Power BI does not allow sufficient control over the visual if I merely create a bar graph and drag these measures in to the visual directly. Therefore, I will need to create a table and apply a switch measure that replaces the table values with the measures above. Below is the table I created manually to start this process. I created this using the "enter data" option in Power BI.
+* Power BI does not allow sufficient control over the visual if I merely create a bar graph and drag these measures into the visual directly. Therefore, I will need to create a table and apply a switch measure that replaces the table values with the measures above. Below is the table I created manually to start this process. I created this using the "enter data" option in Power BI.
    * ![Centroid_count_switch_table](Assets/Centroid_count_switch_table.png)
 * Then, I applied the following switch measure to the manually created table. Most of the visuals within this project were created using the same method. Moving forward, I will call this the "switch method"
    * ![Centroid_count_switch_measure](Assets/centroid_count_switch_measure.png)
 * I created a bar chart, dragged the switch measure to the y-axis, and dragged the centroid category from the manually created table to the x-axis. I formatted the chart by color coding the bars, adding data labels, changing the title and labeling each axis. Below is the resulting chart. It shows that the centroid groups order from largest to smallest:
    * ![Centroid_count_chart](Assets/Centroid_count_bar_chart.png)
-* I split my report in to 5 pages. The group size chart above goes in the size page of the report:
+* I split my report into 5 pages. The group size chart above goes in the size page of the report:
    * ![Report_pages](Assets/Report_pages.png)
 
 #### Total Spend Per Group
@@ -398,21 +398,21 @@ FROM
 * Now that my stakeholders know it would make business sense to increase the size of group 3, I will show them the key characteristics of group 3. This will help them begin an effective marketing campaign. I will create a marketing page within the report that shows the gender distribution, age distribution, percentage of purchases from each category, and geographic distribution for each of the groups. The visuals on this page will be controlled by a slicer that changes the visuals to reflect the chosen group.
 
 ##### Slicer 
-* I create the slicer and drag the Centroid id column name from the data set in to the field:
+* I create the slicer and drag the Centroid id column name from the data set into the field:
    * ![marketing_slicer](Assets/marketing_slicer.png)
 
 ##### Gender
 * I will show the gender distribution for centroid group 3:
    *  I start by creating the following measure for males and females in the specified group. This measure creates a total id variable that counts the customers when the centroid id column is filtered to the selected value in the slicer, creates a gender count variable that counts the customers when the centroid id is equal to the value in the slicer and gender column is filtered to the applicable gender, and divides the gender count variable by the total id variable:
       *  ![gender_measure](Assets/gender_measure.png)
-   *  I create a pie chart visual and drag the female and male measures in to the value field:
+   *  I create a pie chart visual and drag the female and male measures into the value field:
       *  ![gender_visual_build](Assets/gender_visual_build.png)
    *  This results in the following visual which shows that group 3 is made up of 82.7% males and 17.3% females:
       *  ![gender_chart](Assets/gender_chart.png)
 
 ##### Age
 * I will create a bar chart that shows the age distribution for each group:
-   * The customers within this dataset are ages 12-70. I will split them in to 10 year ranges. I create measures for each age range. These measures create a variable that counts the number of customers when the data is filtered to the cetroid id specified in the slicer and the age falls within the applicable range, a variable that counts the total customers when the data is filtered to the group chosen in the slicer, and divides the age range count variable by the total count variable. This shows what percentage of customers from the chosen group fall within each age range:
+   * The customers within this dataset are ages 12-70. I will split them into 10 year ranges. I create measures for each age range. These measures create a variable that counts the number of customers when the data is filtered to the cetroid id specified in the slicer and the age falls within the applicable range, a variable that counts the total customers when the data is filtered to the group chosen in the slicer, and divides the age range count variable by the total count variable. This shows what percentage of customers from the chosen group fall within each age range:
       * ![age_measure](Assets/age_measure.png)
    * Then, I create an age category table for the switch method:
       * ![age_table](Assets/age_table.png)
@@ -422,7 +422,7 @@ FROM
       * ![age_chart](Assets/age_chart.png)
 
 ##### Purchase Categories
-* I will create a bar chart that shows what percentage of purchases fall in to each category per group:
+* I will create a bar chart that shows what percentage of purchases fall into each category per group:
    * The dataset includes 27 product categories. I reduce this to 10 sub categories for simplification as shown below:
       * ![sub_category_table](Assets/sub_category_table.png)
    * I create 10 measures like the one below for bottoms. This measure creates a variable called categorycount which filters the data to the chosen centroid group in the slicer and then sums the purchase categories where each of the applicable sub categories are listed. Then, it creates a total item variable which sums all of the items purchased when the data is filtered to the centroid id selected in the slicer. Last, the measure divides the category count variable by the total item count variable. This shows the percentage of items that the selected group purchased that fell within the applicable category:
@@ -461,7 +461,7 @@ FROM
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## Coursera Case Study
-I analyze the data of Fitbit users to derive marketing insights for my stakeholders. This is a case study for my Google Data Analytics Certificate. To complete this task, I use the 6 step data analyses process outlined in the course: ask, prepare, process, analyze, share, and act. 
+I analyze the data of Fitbit users to derive marketing insights for my stakeholders. This is a case study for my Google Data Analytics Certificate. To complete this task, I use the 6 step data analysis process outlined in the course: ask, prepare, process, analyze, share, and act. 
 ### Prompt
 * You are a data analyst for a company called Bellabeat. Bellabeat makes wearable fitness devices.
 * Your team has been asked to anazlyze trends in smart fitness device usage in an effort to help Bellabeat reach their target market more effectively.
@@ -488,7 +488,7 @@ I analyze the data of Fitbit users to derive marketing insights for my stakehold
    * To answer this question, I use the hourly calories tables for both date ranges.
       * I start by opening these tables in Excel. Then, I extract the hour from the date-hour column using flash fill. Below is the table:
          * ![Hourly Calories table](Assets/hourly_calories_table.png)
-      * Then, I download the tables in to BigQuery and run the following query on them:
+      * Then, I download the tables into BigQuery and run the following query on them:
 ```sql
 SELECT
   Hour,
@@ -572,7 +572,7 @@ A task's priority is determined by it's importance category (where does the task
 ### Priority Sort Design
 * Set up 2 tabs. Tab one is the actual to do list calculator that will sort tasks. Tab 2 is the points tab.
    * The points tab contains 3 separate tables: Importance table, effort table, and urgency table.
-#### Importance: what category does this task fall in to? rank these categories from most to least important 
+#### Importance: what category does this task fall into? rank these categories from most to least important 
    * Assign each category an importance letter and a point value. Lower points result in higher priority rank
 #### Effort: how complex is the task? how much time will it take?
    * Rank these complexity categories from least to most effort and assign a point value to each complexity category. The less complex the lower the points and higher priority.
@@ -644,7 +644,7 @@ A task's priority is determined by it's importance category (where does the task
    * Third Fastest team: 25 points
 
 #### Foot Race 
-* Participants will race .5 miles. If a team's participant falls in to any of the following categories, the team will be awarded the adjacent point value. After summing the total points for each team, the team with the most points will get 150 points. The team with the second most points will get 75 points:
+* Participants will race .5 miles. If a team's participant falls into any of the following categories, the team will be awarded the adjacent point value. After summing the total points for each team, the team with the most points will get 150 points. The team with the second most points will get 75 points:
    * First Female: 5 points
    * First Male: 5 points
    * First Over 50: 3 points
@@ -663,7 +663,7 @@ A task's priority is determined by it's importance category (where does the task
 
 #### Extra Point Activities
 * Puzzles: Each complete puzzle will earn the team 50 points
-* Raft Up: Each person that goes in to the lake will earn their team 5 points
+* Raft Up: Each person that goes into the lake will earn their team 5 points
 * Idols: Each idol found will earn the team 30 points
 
 ### Data Sources and Flow
@@ -671,7 +671,7 @@ A task's priority is determined by it's importance category (where does the task
 2. Event staff will fill out a printed event scorecard based on the results of each event or extra point activity. These scorecards will be submitted to me.
 3. I will fill out a google sheets table based on the print outs. In the final product, each event scorecard will have its own tab. The team members on all tabs will reference the roster.
 4. Each team will also have their own tab. The team tabs will reference the event scorecards and total the team's points.
-5. A scoreboard source tab will reference the team totals and bring them in to one table.
+5. A scoreboard source tab will reference the team totals and bring them into one table.
 6. A scorecoard tab will reference the scorecoard source table to create a dynamic bar chart visual where each team is represented by one bar. The size of a teams bar will change based on the number of points they have. The team with the most points wins.
 
 #### Roster
@@ -698,7 +698,7 @@ A task's priority is determined by it's importance category (where does the task
    * ![scoreboard_source_values](Assets/scoreboard_source_values.png)
 
 #### Final Scoreboard
-* Lastly, I create a scoreboard tab. I add a stacked bar chart that referenced the data from the scoreboard source tab. I use customize series to color code the bars and text for each team. As the scorecards for each even are updated, the bars on the scoreboard change in size to reflect the points for each team. During the competition, I plugged my computer in to a tv via hdmi and split my screens. I opened 2 duplicate web broswer tabs of the google sheet. On one screen, I displayed the scoreboard, on the other, I edited the scorecards accordingly. That way, everyone could see their most current score via dynamic visual:
+* Lastly, I create a scoreboard tab. I add a stacked bar chart that referenced the data from the scoreboard source tab. I use customize series to color code the bars and text for each team. As the scorecards for each even are updated, the bars on the scoreboard change in size to reflect the points for each team. During the competition, I plugged my computer into a tv via hdmi and split my screens. I opened 2 duplicate web broswer tabs of the google sheet. On one screen, I displayed the scoreboard, on the other, I edited the scorecards accordingly. That way, everyone could see their most current score via dynamic visual:
    * ![final_scoreboard](Assets/final_scoreboard.png)
 
 [Home](#sam-metz-data-portfolio)
