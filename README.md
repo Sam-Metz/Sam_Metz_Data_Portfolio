@@ -24,7 +24,7 @@ Thank you for visiting my data portoflio.
 
     * order_items: Includes information about the line items included on each order
        *  ![Order Items](Assets/order_items_table.png)
-    *  users: Includes Information about each customer
+    *  users: Includes information about each customer
         *  ![users](Assets/users_table.png)
     *  products: Includes details about the products sold by the company
         * ![Order Items](Assets/products_table.png)
@@ -52,9 +52,13 @@ Spend AS
             order_id)
       GROUP BY
         user_id)
-    /*Spend creates an order table that calculates the total price of each order (excluding cancelled orders) in the order_items table.
-The order table has one row for each order. It shows the user id for each order as well.
-The outer query calculates the total spend and average spend per customer based on the temporary inner table. */,
+    /*Spend creates an order table that calculates the total
+price of each order (excluding cancelled orders) in the
+order_items table.
+The order table has one row for each order. It shows the user
+id for each order as well.
+The outer query calculates the total spend and average spend
+per customer based on the temporary inner table. */,
 Last_Purchase AS 
       (SELECT
         DATE_DIFF(CURRENT_DATE(), DATE(MAX(created_at)), DAY) AS days_since_last_purchase,
@@ -65,8 +69,10 @@ Last_Purchase AS
           status <> 'Cancelled'
           GROUP BY
             user_id)
-      /*Last_Purchase finds the difference between the maximum created date and the current date for each order (excluding cancelled)
-in the order_items table and groups by user id to show the days since last purchase for each user*/,
+      /*Last_Purchase finds the difference between the maximum
+created date and the current date for each order (excluding cancelled)
+in the order_items table and groups by user id to show
+the days since last purchase for each user*/,
 Country AS
       (SELECT
         *
@@ -80,10 +86,17 @@ Country AS
         )
         PIVOT (max(flag) FOR country IN ( 'Brasil',  'Japan',  'United States',  'Colombia',  'Spain',  'China',  'Australia',  'France',  'Germany',  'Belgium',  'South Korea',  'Poland',  'United Kingdom',  'Deutschland',  'Austria'
 )))
-      /*Country uses a One-hot method to represent customer countries. It starts by creating a table that has a user id column and a country coumn.
-Each time the query finds a match between a user id and a country, it puts a 1 in the corresponding cell. Pivot the flips the data
-and creates a new table with one column per country. The maximum value in the list of country columns for each user is marked in the corresponding
-country column for that user. The query groups by user id by default.*/,
+      /*Country uses a One-hot method to represent customer
+countries. It starts by creating a table that has a user
+id column and a country coumn.
+Each time the query finds a match between a user id and a
+country, it puts a 1 in the corresponding cell. Pivot the
+flips the data
+and creates a new table with one column per country. The
+maximum value in the list of country columns for each
+user is marked in the corresponding
+country column for that user. The query groups by user
+id by default.*/,
 Category AS 
       (SELECT
        *
@@ -103,9 +116,15 @@ Category AS
         )
         PIVOT
           (SUM(flag) FOR Category IN( 'Accessories', 'Plus', 'Swim', 'Active', 'Socks & Hosiery', 'Socks', 'Dresses', 'Pants & Capris', 'Fashion Hoodies & Sweatshirts', 'Skirts', 'Blazers & Jackets', 'Suits', 'Tops & Tees', 'Sweaters', 'Shorts', 'Jeans', 'Maternity', 'Sleep & Lounge', 'Suits & Sport Coats', 'Pants', 'Intimates', 'Outerwear & Coats', 'Underwear', 'Leggings', 'Jumpsuits & Rompers', 'Clothing Sets')))
-      /*Category joins the products and order items tables so that we can reference the product categories for each purchase.
-It then uses a one hot method by flagging each instance where a user id makes a purchase from a given category. It, then, creates a table with one column
-per category that shows the number of times that each user makes a purchase from each category.*/
+      /*Category joins the products and order items
+tables so that we can reference the product categories
+for each purchase.
+It then uses a one hot method by flagging each
+instance where a user id makes a purchase from a
+given category. It, then, creates a table with
+one column
+per category that shows the number of times that
+each user makes a purchase from each category.*/
 SELECT 
           ANY_VALUE( CASE WHEN Lower(u.gender) = 'female' THEN 1
           WHEN Lower(u.gender) = 'male' THEN 0
@@ -135,7 +154,9 @@ SELECT
                           COALESCE(ANY_VALUE(co.`United Kingdom`),0) AS United_Kingdom,
                           COALESCE(ANY_VALUE(co.Deutschland),0) AS Deutschland,
                           COALESCE(ANY_VALUE(co.Austria),0) AS Austria,
-                        /*Pulls the country column and corresponding value of 0 or 1 (1 if the user is from that country) from the country table created above*/
+                        /*Pulls the country column and corresponding
+value of 0 or 1 (1 if the user is from that country) from the
+country table created above*/
 
         ANY_VALUE(lp.days_since_last_purchase) AS days_since_last_purchase,
                           COALESCE(ANY_VALUE(c.Accessories), 0) AS Accessories,
@@ -164,39 +185,46 @@ SELECT
                           COALESCE(ANY_VALUE(c.Leggings), 0) AS Leggings,
                           COALESCE(ANY_VALUE(c.`Jumpsuits & Rompers`), 0) AS Jumpsuits_Rompers,
                           COALESCE(ANY_VALUE(c.`Clothing Sets`), 0) AS Clothing_Sets
-                        /*Pulls the category column and the sum of purchases made from each category from the category table created above.*/
+                        /*Pulls the category column and the sum of purchases
+made from each category from the category table created above.*/
       FROM
         bigquery-public-data.thelook_ecommerce.users u
       LEFT JOIN
         bigquery-public-data.thelook_ecommerce.order_items o
       ON
         u.id = o.user_id
-      /*Joins the users and order_items tables based on records where the user id's match*/
+      /*Joins the users and order_items tables
+based on records where the user id's match*/
       LEFT JOIN
         bigquery-public-data.thelook_ecommerce.products p
       ON
         o.product_id = p.id
-      /*Joins order_items and products tables on records where the product id's match*/
+      /*Joins order_items and products tables on
+records where the product id's match*/
       LEFT JOIN
         Category c
       ON
         c.user_id = u.id
-      /*Joins the category table created above and the user table on records where the user id's match*/
+      /*Joins the category table created above and
+the user table on records where the user id's match*/
       LEFT JOIN
         Country co
       ON
         co.id = u.id
-      /*Joins the country table created above and the user table on records where the user id's match.*/
+      /*Joins the country table created above and
+the user table on records where the user id's match.*/
       LEFT JOIN
         Last_Purchase lp
       ON
         LP.user_id = u.id
-      /*Joins the last purchase table created above and the user table on records where the user id's match*/
+      /*Joins the last purchase table created above and
+the user table on records where the user id's match*/
       LEFT JOIN
         Spend s
       ON
         s.user_id = u.id
-      /*Joins the spend table created above and the user table on records where the user id's match*/
+      /*Joins the spend table created above and
+the user table on records where the user id's match*/
       WHERE
         o.status <> 'Cancelled'
       GROUP BY
@@ -377,11 +405,11 @@ FROM
    * ![aaverages_report_full_page](Assets/averages_report_full_page.png)
 
 ##### Revenue Potential
-* I want to summarize the insights found from analyzing the customer purchase behaviors using a visual for my stakeholders. The visual will be a bar chart with one bar per centroid group. The size of these bars will be controlled by a toggle that adds a specified number of customers to all of the groups. The bars will show how much revenue is added when each of the groups grow by the amount of people specified in the toggle.
+* I want to summarize the insights found from analyzing the customer purchase behaviors and show the growth potential of each group. The visual I use to do this will be a bar chart with one bar per centroid group. The size of these bars will be controlled by a toggle that adds a specified number of customers to all of the groups. The bars will show how much revenue is added when each of the groups grow by the amount of people specified in the toggle.
    * To create this visual, I start by creating the customers added toggle. I do this using the new parameter funtion in Power BI:
       * ![customer_adder_toggle](Assets/customer_adder_toggle.png)
    * Then, I create a revenue portential measure for each group by executing the steps below.
-      * Create a person count variable which is the count of customers when the data is filtered the specified centroid id.
+      * Create a person count variable which is the count of customers when the data is filtered to the specified centroid id.
       * Create a current rev variable which is sum of total spend when the data is filtered to the specified centroid id.
       * Create an average spend variable: divide the current rev variable by the person count variable.
       * Create an additional rev variable: multiply the average spend variable by the amount specified in the toggle.
@@ -427,7 +455,7 @@ FROM
       * ![sub_category_table](Assets/sub_category_table.png)
    * I create 10 measures like the one below for bottoms. This measure creates a variable called categorycount which filters the data to the chosen centroid group in the slicer and then sums the purchase categories where each of the applicable sub categories are listed. Then, it creates a total item variable which sums all of the items purchased when the data is filtered to the centroid id selected in the slicer. Last, the measure divides the category count variable by the total item count variable. This shows the percentage of items that the selected group purchased that fell within the applicable category:
       * ![bottoms_measure](Assets/bottoms_measure.png)
-   * Manually repeating the measure creation process above for 10 category measure was too tedious. Therefore, I created an excel table and used concatenate to create the measures. As shown below, I put the sub categories in columns A-F, the new category name in column G, and each measure component in columns I-K. The measure components were similar across all of the measures so these could be easily autofilled to the cells below. The only difference between the measures was the sub category names. Once the table was filled with this data, I applied this concatenate formula: =CONCAT(H5,G5,I5,F5,J5,E5,J5,D5,K5) to the bottoms category row and autofilled the other cells in the concat column. The snip below shows the table contents for the bottoms and dresses_suits categories:
+   * Manually repeating the measure creation process above for 10 category measures was too tedious. Therefore, I created an excel table and used concatenate to create the measures. As shown below, I put the sub categories in columns A-F, the new category name in column G, and each measure component in columns I-K. The measure components were similar across all of the measures so these could be easily autofilled to the cells below. The only difference between the measures was the sub category names. Once the table was filled with this data, I applied this concatenate formula: =CONCAT(H5,G5,I5,F5,J5,E5,J5,D5,K5) to the bottoms category row and autofilled the other cells in the concat column. The snip below shows the table contents for the bottoms and dresses_suits categories:
       * ![categories_measure_concat_table](Assets/categories_measure_concat_table.png)
    * Once the measures were created, I prepared for the switch method by creating a switch table for the categories:
       * ![category_switch_table](Assets/category_switch_table.png)
