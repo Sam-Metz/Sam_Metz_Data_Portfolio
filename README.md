@@ -662,8 +662,8 @@ A task's priority is determined by it's importance category (where does the task
    * If an act includes all members of a team: 150 points
    * Voted best costume: 50 points
    * Voted most original concept: 50 points
-   * voted highest skill level: 50 points
-   * voted most entertaining: 50 points
+   * Voted highest skill level: 50 points
+   * Voted most entertaining: 50 points
 
 #### Car Pull
 * Teams will compete to pull a car 50 yards:
@@ -695,26 +695,26 @@ A task's priority is determined by it's importance category (where does the task
 * Idols: Each idol found will earn the team 30 points
 
 ### Data Sources and Flow
-1. A roster tab within a Google Sheets document will show who is on each team
+1. A roster tab within a Google Sheets document will show who is on each team.
 2. Event staff will fill out a printed event scorecard based on the results of each event or extra point activity. These scorecards will be submitted to me.
 3. I will fill out a google sheets table based on the print outs. In the final product, each event scorecard will have its own tab. The team members on all tabs will reference the roster.
 4. Each team will also have their own tab. The team tabs will reference the event scorecards and total the team's points.
 5. A scoreboard source tab will reference the team totals and bring them into one table.
-6. A scorecoard tab will reference the scorecoard source table to create a dynamic bar chart visual where each team is represented by one bar. The size of a teams bar will change based on the number of points they have. The team with the most points wins.
+6. A scoreboard tab will reference the scoreboard source table to create a dynamic bar chart visual where each team is represented by one bar. The size of a teams bar will change based on the number of points they have. The team with the most points wins.
 
 #### Roster
-* The rostered is filled out manually based on the team assignments
+* The roster is filled out manually based on the team assignments
    * ![roster](Assets/roster.png)
 
 #### Event Scorecards
-* Below is an example of the foot race scorecard tab. Column B use a vlookup formula like: =vlookup(A3,Roster!A:F,2,false) to reference the names in the roster. I color code the tabs to make them easier to navigate:
+* Below is an example of the foot race scorecard tab. Column B uses a vlookup formula like: =vlookup(A3,Roster!A:F,2,false) to reference the names in the roster. I color code the tabs to make them easier to navigate:
    * ![event_scorecard](Assets/event_scorecard.png)
 
 #### Team Scorecards
 * Below is an example that shows the formulas for the team yellow scorecard. One of these will be made for each team.
-   * Column b references the number in column a as it occurs on the roster and returns that participant's name. The first cell of column B has "YELLOW POINTS" manually entered for reference later.
+   * Column B references the number in column A as it occurs on the roster and returns that participant's name. The first cell of column B has "YELLOW POINTS" manually entered for reference later.
    * The event columns C-K reference the name in column B as it occurs in the event scorecard tabs. The vlookup formulas in these columns return the point values for the event and participant being referenced. "YELLOW POINTS" is used on the event scorecards to label instances when the team earned points that are not tied to an individual participant.
-   * The total column sums all of the points for that row to show the total points for each participany. The total row totals the points for each column to show the total points that the team earned for that event. Where the total column and row meet, all of the team's points are added to get the full total for the team.
+   * The total column sums all of the points for that row to show the total points for each participant. The total row totals the points for each column to show the total points that the team earned for that event. Where the total column and row meet, all of the team's points are added to get the full total for the team.
       * ![team_yellow_formulas](Assets/team_yellow_formulas.png)
    * The image below shows the values instead of the formulas:
       * ![team_yellow_scorecard](Assets/team_yellow_scorecard.png)
@@ -726,7 +726,7 @@ A task's priority is determined by it's importance category (where does the task
    * ![scoreboard_source_values](Assets/scoreboard_source_values.png)
 
 #### Final Scoreboard
-* Lastly, I create a scoreboard tab. I add a stacked bar chart that referenced the data from the scoreboard source tab. I use customize series to color code the bars and text for each team. As the scorecards for each even are updated, the bars on the scoreboard change in size to reflect the points for each team. During the competition, I plugged my computer into a tv via hdmi and split my screens. I opened 2 duplicate web broswer tabs of the google sheet. On one screen, I displayed the scoreboard, on the other, I edited the scorecards accordingly. That way, everyone could see their most current score via dynamic visual:
+* Lastly, I create a scoreboard tab. I add a stacked bar chart that references the data from the scoreboard source tab. I use customize series to color code the bars and text for each team. As the scorecards for each event are updated, the bars on the scoreboard change in size to reflect the points for each team. During the competition, I plug my computer into a tv via hdmi and split my screens. I open 2 duplicate web broswer tabs with the Google Sheet. On one screen, I display the scoreboard, on the other, I edit the scorecards accordingly. That way, everyone can see their most current score via dynamic visual:
    * ![final_scoreboard](Assets/final_scoreboard.png)
 
 [Home](#sam-metz-data-portfolio)
