@@ -8,7 +8,7 @@ Thank you for visiting my data portoflio.
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## K-means Customer Analysis
-* I use a K-means to analyze a sample dataset provided by Big Query. 
+* I use K-means to analyze a sample dataset provided by Big Query. 
 
 ### The Dataset
 * I am working with the_look_ecommerce dataset in Big Query. It consists of 8 tables with sample data for an online retailer. The tables include distribution_centers, events, inventory_items, order_items, products, thelook_ecommerce-table, and users. 
