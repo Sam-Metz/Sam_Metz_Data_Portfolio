@@ -610,9 +610,9 @@ A task's priority is determined by it's importance category (where does the task
 #### Table Setup:
 ##### Urgency Point Column setup:
    * The due date is entered manually for each task.
-      * Once the due date is entered, They Day left column calculates the number of days left using the formula: =F2 - TODAY(). This finds the difference between the current date and the due date. The day left column is formatted as a whole number.
+      * Once the due date is entered, The Day left column calculates the number of days left using the formula: =F2 - TODAY(). This finds the difference between the current date and the due date. The day left column is formatted as a whole number.
       * ![Day Left](Assets/Day_Left_Formula.png)
-         * The urgency column assigns an urgency category based on the number of days left until the due date using formula: =IF(G2<=0,1, IF(G2<=3,2,IF(G2<=5,3,IF(G2<=20,4,5)))) as shown below. If the day left column contains a value less than or equal to 0 then it returns 1. If the day left column contains a value that is less than or equal to 3 then it returns 2. If the day left column contains a value that is less than or equal to 5 then it returns a 3. If the day left column contains a value that is less than or equal to 20 then it return 4. Otherwise, it returns a value of 5.
+         * The urgency column assigns an urgency category based on the number of days left until the due date using formula: =IF(G2<=0,1, IF(G2<=3,2,IF(G2<=5,3,IF(G2<=20,4,5)))) as shown below. If the day left column contains a value less than or equal to 0, then it returns 1. If the day left column contains a value that is less than or equal to 3, then it returns 2. If the day left column contains a value that is less than or equal to 5, then it returns a 3. If the day left column contains a value that is less than or equal to 20, then it return 4. Otherwise, it returns a value of 5.
          * ![Urgency Formual](Assets/Urgency_Formula.png)
             * The urgency point column looks up a point value by referencing the value in the urgency column and returning the corresponding point value from the urgency table in the points tab using formula: =VLOOKUP(E2,Points!I:J,2,FALSE) as shown below:
                * ![Urgency Point](Assets/Urgency_Point_Formula.png)
