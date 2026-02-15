@@ -363,9 +363,9 @@ FROM
 ##### Avg. Spend Per Person
 * I create an average spend per person measure for each group. These measures create a total spend variable (the total spend when the data is filtered to the specified group), a total person count variable (the count of users when the data is filtered to the specified group), and then divide the total spend variable by the total person count variable:
    * ![Average_spend_per_person_measure](Assets/Average_spend_per_person_measure.png)
-* I start the switch method by creating and average spend per person category table:
+* I start the switch method by creating an average spend per person category table:
    * ![Average_spend_per_person_switch_table](Assets/average_spend_per_person_switch_table.png)
-* I apply an average spend per person swith measure to the table:
+* I apply an average spend per person switch measure to the table:
    * ![Average_spend_per_person_switch_measure](Assets/average_spend_per_person_switch_measure.png)
 * I drag the average spend per person switch measure to the y-axis and the table category to the x-axis. After formatting, the chart below shows that centroid group 3 spends the most money per person:
    * ![Average_spend_per_person_chart](Assets/average_spend_per_person_chart.png)
@@ -373,7 +373,7 @@ FROM
 ##### Avg. Order Spend
 * I create an average order spend measure for each group:
    * ![Average_order_spend_measure](Assets/average_order_spend_measure.png)
-* I create a category table for the swith method:
+* I create a category table for the switch method:
    * ![Average_order_spend_switch_table](Assets/average_order_spend_switch_table.png)
 * I apply an average order spend switch measure to the table:
    * ![Average_order_spend_switch_measure](Assets/average_order_spend_switch_measure.png)
@@ -397,11 +397,11 @@ FROM
    * ![days_since_last_purchase_table](Assets/days_switch_table.png)
 * I create a days since last purchase switch measure:
    * ![days_switch_measure](Assets/days_switch_measure.png)
-* I apply the switch measure to a bar graph and format the following visual. This shows that group 3 customers make purchases most frequently:
+* I apply the switch measure to a bar graph and format the following visual. This shows that group 3 customers made purchases most recently:
    * ![days_chart](Assets/days_chart.png)
 
 ##### Purchase Behavior Final Report Page
-* Below is the final report page that I will share with my stakeholders. The visuals show that centroid group 3 spends the most per person, spends the most per order, and places the most orders per person. The average customer in group 3 also places orders more frequently than the other groups:
+* Below is the final report page that I will share with my stakeholders. The visuals show that centroid group 3 spends the most per person, spends the most per order, and places the most orders per person. The average customer in group 3 also placed orders more recently than the other groups which likely means they place orders more frequently:
    * ![aaverages_report_full_page](Assets/averages_report_full_page.png)
 
 ##### Revenue Potential
@@ -431,7 +431,7 @@ FROM
 
 ##### Gender
 * I will show the gender distribution for centroid group 3:
-   *  I start by creating the following measure for males and females in the specified group. This measure creates a total id variable that counts the customers when the centroid id column is filtered to the selected value in the slicer, creates a gender count variable that counts the customers when the centroid id is equal to the value in the slicer and gender column is filtered to the applicable gender, and divides the gender count variable by the total id variable:
+   *  I start by creating the following measure for males and females in the specified group. This measure creates a total id variable that counts the customers when the centroid id column is filtered to the selected value in the slicer, creates a gender count variable that counts the customers when the centroid id is equal to the value in the slicer and the gender column is filtered to the applicable gender, and divides the gender count variable by the total id variable:
       *  ![gender_measure](Assets/gender_measure.png)
    *  I create a pie chart visual and drag the female and male measures into the value field:
       *  ![gender_visual_build](Assets/gender_visual_build.png)
